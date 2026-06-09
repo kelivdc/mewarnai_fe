@@ -62,7 +62,7 @@ export function Nav() {
                 <NavLink
                   to="/pricing"
                   icon={<BadgeDollarSign size={20} />}
-                  label="Harga"
+                  label="Pricing"
                 />
               </li>
               <li>
@@ -79,7 +79,7 @@ export function Nav() {
                 <NavLink
                   to="/pricing"
                   icon={<BadgeDollarSign size={20} />}
-                  label="Harga"
+                  label="Pricing"
                 />
               </li>
               <li>

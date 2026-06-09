@@ -6,17 +6,12 @@ import { LogIn, UserPlus, Palette, ImagePlus, Sparkles } from 'lucide-react'
 
 export const Route = createFileRoute('/')({
   beforeLoad: ({ context }) => {
-    // Authenticated users skip the landing page and go straight to the gallery
     if (context.user) {
       throw redirect({ to: '/gallery' })
     }
   },
   component: HomePage,
 })
-
-// ---------------------------------------------------------------------------
-// Feature highlight card
-// ---------------------------------------------------------------------------
 
 function FeatureCard({
   icon,
@@ -38,21 +33,16 @@ function FeatureCard({
   )
 }
 
-// ---------------------------------------------------------------------------
-// HomePage
-// ---------------------------------------------------------------------------
-
 function HomePage() {
   return (
     <div className="min-h-[calc(100dvh-64px)] bg-gradient-to-b from-orange-50 via-yellow-50 to-white">
 
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="flex flex-col items-center justify-center gap-6 px-4 pt-16 pb-12 text-center">
-        {/* Big emoji mascot */}
         <div
           className="text-8xl select-none animate-bounce"
           role="img"
-          aria-label="Palet warna"
+          aria-label="Color palette"
           style={{ animationDuration: '2.5s' }}
         >
           🎨
@@ -60,14 +50,15 @@ function HomePage() {
 
         <div className="space-y-3 max-w-2xl">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-orange-500 leading-tight">
-            Mari Mewarnai!
+            Let's Color!
           </h1>
           <p className="text-xl sm:text-2xl font-semibold text-gray-600">
-            Aplikasi mewarnai seru untuk anak-anak 🌈
+            The fun coloring app made for kids 🌈
           </p>
           <p className="text-base text-gray-500 max-w-md mx-auto leading-relaxed">
-            Upload gambar, ubah jadi halaman mewarnai hitam putih, lalu warnai
-            langsung di browser — simpan dan lanjutkan kapan saja!
+            Upload any picture, turn it into a black-and-white coloring page,
+            then color it right in your browser — save your progress and come
+            back any time!
           </p>
         </div>
 
@@ -85,7 +76,7 @@ function HomePage() {
             ].join(' ')}
           >
             <UserPlus size={22} aria-hidden="true" />
-            Daftar Gratis
+            Sign Up Free
           </Link>
 
           <Link
@@ -101,7 +92,7 @@ function HomePage() {
             ].join(' ')}
           >
             <LogIn size={22} aria-hidden="true" />
-            Sudah Punya Akun
+            I Already Have an Account
           </Link>
 
           <Link
@@ -115,35 +106,35 @@ function HomePage() {
               'focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300',
             ].join(' ')}
           >
-            Lihat harga →
+            See pricing →
           </Link>
         </div>
       </section>
 
       {/* ── Feature highlights ────────────────────────────────────────── */}
       <section
-        aria-label="Fitur unggulan"
+        aria-label="Key features"
         className="px-4 py-12 max-w-4xl mx-auto"
       >
         <h2 className="text-2xl font-extrabold text-center text-gray-700 mb-8">
-          ✨ Apa yang bisa kamu lakukan?
+          ✨ What can you do?
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <FeatureCard
             icon={<ImagePlus size={28} />}
-            title="Upload Gambar"
-            description="Upload foto atau gambar favoritmu, kami ubah jadi halaman mewarnai hitam putih otomatis."
+            title="Upload a Picture"
+            description="Upload any photo or drawing and we'll automatically convert it to a black-and-white coloring page."
           />
           <FeatureCard
             icon={<Palette size={28} />}
-            title="Warnai di Browser"
-            description="Pilih warna dari 22 pilihan warna cerah, lalu klik area gambar untuk langsung mewarnai!"
+            title="Color in the Browser"
+            description="Pick from 22 bright colors and click any area to fill it with color instantly!"
           />
           <FeatureCard
             icon={<Sparkles size={28} />}
-            title="Simpan Progres"
-            description="Simpan hasil mewarnaimu dan lanjutkan lagi kapan saja — tidak perlu mulai dari awal."
+            title="Save Your Progress"
+            description="Save your coloring and continue right where you left off — no starting over!"
           />
         </div>
       </section>
@@ -151,7 +142,7 @@ function HomePage() {
       {/* ── Bottom CTA strip ──────────────────────────────────────────── */}
       <section className="bg-orange-500 py-10 px-4 text-center">
         <p className="text-xl sm:text-2xl font-extrabold text-white mb-4">
-          Siap mulai mewarnai? 🖌️
+          Ready to start coloring? 🖌️
         </p>
         <Link
           to="/register"
@@ -165,7 +156,7 @@ function HomePage() {
           ].join(' ')}
         >
           <UserPlus size={22} aria-hidden="true" />
-          Daftar Sekarang — Gratis!
+          Sign Up Now — It's Free!
         </Link>
       </section>
     </div>

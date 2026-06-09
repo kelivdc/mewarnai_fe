@@ -12,10 +12,6 @@ import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 import { Label } from '../components/ui/label'
 
-// ---------------------------------------------------------------------------
-// Route definition — redirect authenticated users straight to /gallery
-// ---------------------------------------------------------------------------
-
 export const Route = createFileRoute('/register')({
   beforeLoad: ({ context }) => {
     if (context.user) {
@@ -25,21 +21,13 @@ export const Route = createFileRoute('/register')({
   component: RegisterPage,
 })
 
-// ---------------------------------------------------------------------------
-// RegisterPage component
-// ---------------------------------------------------------------------------
-
 function RegisterPage() {
   const navigate = useNavigate()
 
-  // Server-level error (e.g. "username taken")
   const [serverError, setServerError] = useState<string | null>(null)
-
-  // Loading spinner — only shown after 500 ms delay (req 8.6)
   const [showSpinner, setShowSpinner] = useState(false)
   const spinnerTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Kick off the 500 ms timer whenever the form transitions to submitting state
   const startSpinnerTimer = () => {
     spinnerTimerRef.current = setTimeout(() => setShowSpinner(true), 500)
   }
@@ -51,19 +39,13 @@ function RegisterPage() {
     setShowSpinner(false)
   }
 
-  // Clean up timer on unmount
   useEffect(() => () => clearSpinnerTimer(), [])
-
-  // ---------------------------------------------------------------------------
-  // TanStack Form
-  // ---------------------------------------------------------------------------
 
   const form = useForm({
     defaultValues: {
       username: '',
       password: '',
     },
-
     onSubmit: async ({ value }) => {
       setServerError(null)
       startSpinnerTimer()
@@ -76,7 +58,6 @@ function RegisterPage() {
           return
         }
 
-        // Success — navigate to gallery
         navigate({ to: '/gallery' })
       } catch {
         setServerError('Something went wrong. Please try again.')
@@ -91,22 +72,17 @@ function RegisterPage() {
   return (
     <div className="min-h-[calc(100dvh-64px)] flex items-center justify-center px-4 py-10 bg-gradient-to-br from-brand-purple/10 via-background to-brand-orange/10">
       <div className="w-full max-w-md">
-
-        {/* ── Card ───────────────────────────────────────────────── */}
         <div className="bg-card rounded-2xl shadow-lg border border-border p-8">
-
-          {/* Header */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-purple/15 mb-4">
               <UserPlus size={32} className="text-brand-purple" aria-hidden="true" />
             </div>
-            <h1 className="text-3xl font-extrabold text-foreground">Daftar Akun</h1>
+            <h1 className="text-3xl font-extrabold text-foreground">Create Account</h1>
             <p className="mt-2 text-base text-muted-foreground">
-              Buat akun baru untuk mulai mewarnai!
+              Sign up and start coloring today!
             </p>
           </div>
 
-          {/* Server error banner */}
           {serverError && (
             <div
               role="alert"
@@ -117,7 +93,6 @@ function RegisterPage() {
             </div>
           )}
 
-          {/* ── Form ──────────────────────────────────────────────── */}
           <form
             onSubmit={(e) => {
               e.preventDefault()
@@ -128,25 +103,19 @@ function RegisterPage() {
             className="space-y-6"
             aria-label="Registration form"
           >
-
-            {/* Username field */}
             <form.Field
               name="username"
               validators={{
                 onChange: ({ value }) => {
-                  if (!value || value.trim() === '')
-                    return 'Username tidak boleh kosong'
-                  if (value.trim().length < 3)
-                    return 'Username minimal 3 karakter'
-                  if (value.trim().length > 30)
-                    return 'Username maksimal 30 karakter'
+                  if (!value || value.trim() === '') return 'Username is required'
+                  if (value.trim().length < 3) return 'Username must be at least 3 characters'
+                  if (value.trim().length > 30) return 'Username must be 30 characters or fewer'
                   if (!/^[a-zA-Z0-9_]+$/.test(value.trim()))
-                    return 'Username hanya boleh huruf, angka, dan garis bawah'
+                    return 'Username may only contain letters, numbers, and underscores'
                   return undefined
                 },
                 onBlur: ({ value }) => {
-                  if (!value || value.trim() === '')
-                    return 'Username tidak boleh kosong'
+                  if (!value || value.trim() === '') return 'Username is required'
                   return undefined
                 },
               }}
@@ -163,25 +132,19 @@ function RegisterPage() {
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
-                    placeholder="contoh: anak_hebat"
+                    placeholder="e.g. cool_kid"
                     autoComplete="username"
                     autoCapitalize="none"
                     spellCheck={false}
                     disabled={isSubmitting}
                     aria-describedby={
-                      field.state.meta.errors.length > 0
-                        ? `${field.name}-error`
-                        : undefined
+                      field.state.meta.errors.length > 0 ? `${field.name}-error` : undefined
                     }
                     aria-invalid={field.state.meta.errors.length > 0}
                     className="h-12 text-base"
                   />
                   {field.state.meta.errors.length > 0 && (
-                    <p
-                      id={`${field.name}-error`}
-                      role="alert"
-                      className="text-sm font-semibold text-destructive"
-                    >
+                    <p id={`${field.name}-error`} role="alert" className="text-sm font-semibold text-destructive">
                       {field.state.meta.errors[0]}
                     </p>
                   )}
@@ -189,20 +152,16 @@ function RegisterPage() {
               )}
             </form.Field>
 
-            {/* Password field */}
             <form.Field
               name="password"
               validators={{
                 onChange: ({ value }) => {
-                  if (!value || value === '')
-                    return 'Password tidak boleh kosong'
-                  if (value.length < 8)
-                    return 'Password minimal 8 karakter'
+                  if (!value || value === '') return 'Password is required'
+                  if (value.length < 8) return 'Password must be at least 8 characters'
                   return undefined
                 },
                 onBlur: ({ value }) => {
-                  if (!value || value === '')
-                    return 'Password tidak boleh kosong'
+                  if (!value || value === '') return 'Password is required'
                   return undefined
                 },
               }}
@@ -219,23 +178,17 @@ function RegisterPage() {
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
-                    placeholder="Minimal 8 karakter"
+                    placeholder="At least 8 characters"
                     autoComplete="new-password"
                     disabled={isSubmitting}
                     aria-describedby={
-                      field.state.meta.errors.length > 0
-                        ? `${field.name}-error`
-                        : undefined
+                      field.state.meta.errors.length > 0 ? `${field.name}-error` : undefined
                     }
                     aria-invalid={field.state.meta.errors.length > 0}
                     className="h-12 text-base"
                   />
                   {field.state.meta.errors.length > 0 && (
-                    <p
-                      id={`${field.name}-error`}
-                      role="alert"
-                      className="text-sm font-semibold text-destructive"
-                    >
+                    <p id={`${field.name}-error`} role="alert" className="text-sm font-semibold text-destructive">
                       {field.state.meta.errors[0]}
                     </p>
                   )}
@@ -243,7 +196,6 @@ function RegisterPage() {
               )}
             </form.Field>
 
-            {/* Submit button */}
             <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
               {([canSubmit, submitting]) => (
                 <Button
@@ -254,12 +206,12 @@ function RegisterPage() {
                   {showSpinner ? (
                     <>
                       <Loader2 size={20} className="animate-spin" aria-hidden="true" />
-                      Mendaftar…
+                      Creating account…
                     </>
                   ) : (
                     <>
                       <UserPlus size={20} aria-hidden="true" />
-                      Daftar Sekarang
+                      Create Account
                     </>
                   )}
                 </Button>
@@ -267,29 +219,27 @@ function RegisterPage() {
             </form.Subscribe>
           </form>
 
-          {/* Link to login */}
           <p className="mt-6 text-center text-base text-muted-foreground">
-            Sudah punya akun?{' '}
+            Already have an account?{' '}
             <a
               href="/login"
               className="font-bold text-brand-orange hover:text-brand-orange-hover underline underline-offset-2"
             >
-              Masuk di sini
+              Sign in here
             </a>
           </p>
         </div>
       </div>
 
-      {/* Full-screen loading overlay — shown after 500 ms (req 8.6) */}
       {showSpinner && (
         <div
           role="status"
-          aria-label="Sedang mendaftarkan akun…"
+          aria-label="Creating your account…"
           className="fixed inset-0 z-50 flex items-center justify-center bg-background/70 backdrop-blur-sm"
         >
           <div className="flex flex-col items-center gap-4 rounded-2xl bg-card border border-border px-8 py-6 shadow-xl">
             <Loader2 size={48} className="animate-spin text-brand-purple" aria-hidden="true" />
-            <p className="text-lg font-bold text-foreground">Mendaftar…</p>
+            <p className="text-lg font-bold text-foreground">Creating account…</p>
           </div>
         </div>
       )}

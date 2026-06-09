@@ -57,10 +57,10 @@ interface Plan {
 const plans: Plan[] = [
   {
     id: 'free',
-    name: 'Gratis',
-    tagline: 'Coba dulu, tanpa kartu kredit',
-    price: 'Rp 0',
-    pricePer: 'selamanya',
+    name: 'Free',
+    tagline: 'Try it out, no credit card needed',
+    price: '$0',
+    pricePer: 'forever',
     color: 'bg-gray-50',
     textColor: 'text-gray-700',
     borderColor: 'border-gray-200',
@@ -68,72 +68,72 @@ const plans: Plan[] = [
     badgeText: 'text-gray-600',
     icon: <Star size={28} className="text-gray-500" />,
     features: [
-      { text: 'Maksimal 3 gambar', included: true },
-      { text: 'Konversi ke halaman mewarnai', included: true },
-      { text: '22 warna pilihan', included: true },
-      { text: 'Simpan & lanjutkan progress', included: true },
-      { text: 'Watermark pada unduhan', included: true },
-      { text: 'Unduh hasil mewarnai', included: true },
-      { text: 'Tanpa watermark', included: false },
-      { text: 'Prioritas konversi gambar', included: false },
-      { text: 'Warna eksklusif tambahan', included: false },
+      { text: 'Up to 3 images', included: true },
+      { text: 'Convert to coloring page', included: true },
+      { text: '22 color choices', included: true },
+      { text: 'Save & resume progress', included: true },
+      { text: 'Watermark on downloads', included: true },
+      { text: 'Download your coloring', included: true },
+      { text: 'No watermark', included: false },
+      { text: 'Priority image conversion', included: false },
+      { text: 'Extra exclusive colors', included: false },
     ],
-    cta: 'Mulai Gratis',
+    cta: 'Get Started Free',
     ctaTo: '/register',
   },
   {
     id: 'pro',
     name: 'Pro',
-    tagline: 'Untuk anak yang suka mewarnai banyak',
-    price: 'Rp 29.000',
-    pricePer: '/ bulan',
+    tagline: 'For kids who love to color a lot',
+    price: '$2.99',
+    pricePer: '/ month',
     color: 'bg-orange-500',
     textColor: 'text-orange-600',
     borderColor: 'border-orange-400',
     badgeBg: 'bg-orange-100',
     badgeText: 'text-orange-700',
-    badge: '🔥 Paling Populer',
+    badge: '🔥 Most Popular',
     popular: true,
     icon: <Zap size={28} className="text-orange-500" />,
     features: [
-      { text: 'Maksimal 500 gambar', included: true, highlight: true },
-      { text: 'Konversi ke halaman mewarnai', included: true },
-      { text: '22 warna pilihan', included: true },
-      { text: 'Simpan & lanjutkan progress', included: true },
-      { text: 'Unduh tanpa watermark', included: true, highlight: true },
-      { text: 'Unduh hasil mewarnai (PNG + PDF)', included: true, highlight: true },
-      { text: 'Prioritas konversi gambar', included: true },
-      { text: 'Warna eksklusif tambahan', included: false },
-      { text: 'Dukungan prioritas', included: false },
+      { text: 'Up to 500 images', included: true, highlight: true },
+      { text: 'Convert to coloring page', included: true },
+      { text: '22 color choices', included: true },
+      { text: 'Save & resume progress', included: true },
+      { text: 'Download without watermark', included: true, highlight: true },
+      { text: 'Download as PNG + PDF', included: true, highlight: true },
+      { text: 'Priority image conversion', included: true },
+      { text: 'Extra exclusive colors', included: false },
+      { text: 'Priority support', included: false },
     ],
-    cta: 'Coba Pro Sekarang',
+    cta: 'Try Pro Now',
     ctaTo: '/register',
   },
   {
     id: 'premium',
     name: 'Premium',
-    tagline: 'Tanpa batas, tanpa kompromi',
-    price: 'Rp 59.000',
-    pricePer: '/ bulan',
+    tagline: 'No limits, no compromises',
+    price: '$5.99',
+    pricePer: '/ month',
     color: 'bg-purple-600',
     textColor: 'text-purple-600',
     borderColor: 'border-purple-400',
     badgeBg: 'bg-purple-100',
     badgeText: 'text-purple-700',
-    badge: '👑 Terbaik',
+    badge: '👑 Best Value',
     icon: <Crown size={28} className="text-purple-500" />,
     features: [
-      { text: 'Gambar tak terbatas', included: true, highlight: true },
-      { text: 'Konversi ke halaman mewarnai', included: true },
-      { text: '22 + 30 warna eksklusif', included: true, highlight: true },
-      { text: 'Simpan & lanjutkan progress', included: true },
-      { text: 'Unduh tanpa watermark', included: true },
-      { text: 'Unduh hasil mewarnai (PNG + PDF)', included: true },
-      { text: 'Prioritas konversi gambar', included: true },
-      { text: 'Template mewarnai eksklusif', included: true, highlight: true },
-      { text: 'Dukungan prioritas 24/7', included: true, highlight: true },
+      { text: 'Unlimited images', included: true, highlight: true },
+      { text: 'Convert to coloring page', included: true },
+      { text: '22 + 30 exclusive colors', included: true, highlight: true },
+      { text: 'Save & resume progress', included: true },
+      { text: 'Download without watermark', included: true },
+      { text: 'Download as PNG + PDF', included: true },
+      { text: 'Priority image conversion', included: true },
+      { text: 'Exclusive coloring templates', included: true, highlight: true },
+      { text: '24/7 priority support', included: true, highlight: true },
     ],
-    cta: 'Mulai Premium',
+    cta: 'Go Premium',
     ctaTo: '/register',
   },
 ]
@@ -301,12 +301,12 @@ function PlanCard({ plan }: { plan: Plan }) {
 
 function HighlightStrip() {
   const items = [
-    { icon: <ImagePlus size={22} className="text-orange-500" />, label: 'Upload gambar sendiri' },
-    { icon: <Palette size={22} className="text-purple-500" />, label: '22+ warna pilihan' },
-    { icon: <Droplets size={22} className="text-blue-500" />, label: 'Flood-fill instan' },
-    { icon: <Download size={22} className="text-green-500" />, label: 'Unduh hasil karya' },
-    { icon: <Infinity size={22} className="text-pink-500" />, label: 'Progress tersimpan' },
-    { icon: <HeartHandshake size={22} className="text-red-500" />, label: 'Aman untuk anak' },
+    { icon: <ImagePlus size={22} className="text-orange-500" />, label: 'Upload your own pictures' },
+    { icon: <Palette size={22} className="text-purple-500" />, label: '22+ color choices' },
+    { icon: <Droplets size={22} className="text-blue-500" />, label: 'Instant flood-fill' },
+    { icon: <Download size={22} className="text-green-500" />, label: 'Download your artwork' },
+    { icon: <Infinity size={22} className="text-pink-500" />, label: 'Progress saved' },
+    { icon: <HeartHandshake size={22} className="text-red-500" />, label: 'Safe for kids' },
   ]
 
   return (
@@ -330,20 +330,20 @@ function HighlightStrip() {
 
 const faqs = [
   {
-    q: 'Apakah saya bisa upgrade kapan saja?',
-    a: 'Ya! Kamu bisa upgrade atau downgrade paket kapan saja. Perubahan berlaku di siklus tagihan berikutnya.',
+    q: 'Can I upgrade or downgrade at any time?',
+    a: 'Yes! You can upgrade or downgrade your plan at any time. Changes take effect at the next billing cycle.',
   },
   {
-    q: 'Apakah paket Gratis benar-benar gratis selamanya?',
-    a: 'Ya, paket Gratis tidak punya batas waktu. Kamu bisa menikmati 3 gambar mewarnai selamanya tanpa biaya.',
+    q: 'Is the Free plan really free forever?',
+    a: 'Absolutely. The Free plan has no time limit. You can enjoy up to 3 coloring pages forever at no cost.',
   },
   {
-    q: 'Bagaimana cara pembayaran?',
-    a: 'Kami menerima transfer bank, e-wallet (GoPay, OVO, Dana), dan kartu kredit/debit.',
+    q: 'How do I pay?',
+    a: 'We accept all major credit and debit cards, as well as PayPal.',
   },
   {
-    q: 'Apakah ada uji coba gratis untuk paket berbayar?',
-    a: 'Ya! Paket Pro dan Premium tersedia dengan uji coba gratis 7 hari. Tidak perlu kartu kredit.',
+    q: 'Is there a free trial for paid plans?',
+    a: 'Yes! Both Pro and Premium come with a free 7-day trial. No credit card required to start.',
   },
 ]
 
@@ -351,7 +351,7 @@ function FAQ() {
   return (
     <section className="max-w-2xl mx-auto px-4 py-16">
       <h2 className="text-2xl font-extrabold text-center text-gray-800 mb-8">
-        ❓ Pertanyaan Umum
+        ❓ Frequently Asked Questions
       </h2>
       <div className="space-y-4">
         {faqs.map((faq, i) => (
@@ -377,15 +377,15 @@ function PricingPage() {
       <section className="text-center px-4 pt-16 pb-12">
         <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 font-bold text-sm px-4 py-2 rounded-full mb-4">
           <Sparkles size={16} aria-hidden="true" />
-          Pilih paket yang cocok untuk kamu
+          Choose the plan that's right for you
         </div>
         <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
-          Mewarnai Lebih Seru,
+          More Coloring Fun,
           <br />
-          <span className="text-orange-500">Tanpa Batas</span>
+          <span className="text-orange-500">No Limits</span>
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto">
-          Mulai gratis, upgrade kalau sudah jatuh cinta. Semua paket bisa dicoba dulu — tidak ada risiko.
+          Start free, upgrade when you love it. Every plan includes a trial — no risk.
         </p>
       </section>
 
@@ -394,7 +394,7 @@ function PricingPage() {
 
       {/* ── Pricing cards ─────────────────────────────────────────────── */}
       <section
-        aria-label="Pilihan paket harga"
+        aria-label="Pricing plans"
         className="max-w-5xl mx-auto px-4 pb-16"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
@@ -402,10 +402,8 @@ function PricingPage() {
             <PlanCard key={plan.id} plan={plan} />
           ))}
         </div>
-
-        {/* Guarantee note */}
         <p className="text-center text-sm text-gray-400 mt-8">
-          🔒 Pembayaran aman &nbsp;·&nbsp; 🔄 Batalkan kapan saja &nbsp;·&nbsp; 7 hari uji coba gratis untuk paket berbayar
+          🔒 Secure payments &nbsp;·&nbsp; 🔄 Cancel any time &nbsp;·&nbsp; 7-day free trial on paid plans
         </p>
       </section>
 
@@ -415,17 +413,17 @@ function PricingPage() {
       {/* ── Bottom CTA ────────────────────────────────────────────────── */}
       <section className="bg-orange-500 py-14 px-4 text-center">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2">
-          Siap mulai petualangan mewarnai? 🎨
+          Ready to start your coloring adventure? 🎨
         </h2>
         <p className="text-white/80 text-base mb-6">
-          Daftar gratis sekarang — tidak butuh kartu kredit.
+          Sign up free today — no credit card required.
         </p>
         <Link
           to="/register"
           className="inline-flex items-center gap-2 bg-white text-orange-500 font-extrabold text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:bg-orange-50 transition-all min-h-[52px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white"
         >
           <Star size={22} aria-hidden="true" />
-          Daftar Gratis Sekarang
+          Sign Up Free Now
         </Link>
       </section>
     </div>
