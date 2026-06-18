@@ -50,7 +50,7 @@ export async function processUploadedImage(
   fileBuffer: Buffer,
   mimeType: string,
   originalFilename: string,
-  userId: number, // eslint-disable-line @typescript-eslint/no-unused-vars — reserved for future use
+  _userId: string, // eslint-disable-line @typescript-eslint/no-unused-vars — reserved for future use
 ): Promise<ProcessResult> {
   // ── 1. Validate MIME type ──────────────────────────────────────────────────
   if (!(ALLOWED_MIME_TYPES as readonly string[]).includes(mimeType)) {

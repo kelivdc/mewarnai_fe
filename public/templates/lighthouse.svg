@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- tower base -->
+  <rect x="60" y="100" width="40" height="90"/>
+  <!-- tower middle -->
+  <rect x="65" y="50" width="30" height="55"/>
+  <!-- tower top -->
+  <rect x="70" y="30" width="20" height="25"/>
+  <!-- roof -->
+  <polygon points="60,32 80,10 100,32"/>
+  <!-- light room -->
+  <rect x="68" y="35" width="24" height="20" rx="2"/>
+  <!-- light beams -->
+  <line x1="80" y1="45" x2="30" y2="60" stroke-width="1.5"/>
+  <line x1="80" y1="45" x2="30" y2="40" stroke-width="1.5"/>
+  <line x1="80" y1="45" x2="130" y2="60" stroke-width="1.5"/>
+  <line x1="80" y1="45" x2="130" y2="40" stroke-width="1.5"/>
+  <!-- windows -->
+  <rect x="72" y="55" width="8" height="10" rx="2"/>
+  <rect x="88" y="55" width="8" height="10" rx="2"/>
+  <rect x="72" y="75" width="8" height="10" rx="2"/>
+  <rect x="88" y="75" width="8" height="10" rx="2"/>
+  <rect x="72" y="110" width="8" height="10" rx="2"/>
+  <rect x="88" y="110" width="8" height="10" rx="2"/>
+  <!-- door -->
+  <rect x="72" y="160" width="16" height="30" rx="3"/>
+  <circle cx="84" cy="175" r="2"/>
+  <!-- stripes on tower -->
+  <rect x="60" y="125" width="40" height="8"/>
+  <rect x="60" y="145" width="40" height="8"/>
+  <!-- ground -->
+  <path d="M20,190 Q60,185 100,190 Q140,185 180,190"/>
+  <!-- rocks -->
+  <circle cx="35" cy="190" r="6"/>
+  <circle cx="50" cy="192" r="8"/>
+  <circle cx="150" cy="190" r="7"/>
+  <circle cx="165" cy="192" r="5"/>
+  <!-- waves -->
+  <path d="M20,195 Q30,192 40,195 Q50,198 60,195" stroke-width="1.5"/>
+  <path d="M140,195 Q150,192 160,195 Q170,198 180,195" stroke-width="1.5"/>
+  <!-- birds -->
+  <path d="M30,40 Q35,35 40,40" fill="none"/>
+  <path d="M150,30 Q155,25 160,30" fill="none"/>
+</svg>

@@ -9,13 +9,19 @@ import { requireAuth } from '../lib/authGuard'
 import { ImageUploadForm } from '../components/ImageUploadForm'
 
 export const Route = createFileRoute('/upload')({
-  beforeLoad: ({ context, location }) => requireAuth({ context, location }),
+  beforeLoad: async ({ context, location }) => requireAuth({ context, location }),
   component: UploadPage,
 })
 
 function UploadPage() {
   return (
-    <div className="min-h-screen bg-background py-10 px-4">
+    <div
+      className="min-h-screen bg-background py-10 px-4"
+      style={{
+        backgroundImage: 'radial-gradient(circle, rgba(241, 213, 184, 0.5) 1px, transparent 1px)',
+        backgroundSize: '24px 24px',
+      }}
+    >
       <div className="mx-auto max-w-2xl">
         <div className="mb-8 text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-green/10 mb-4">

@@ -12,11 +12,12 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 import { Nav } from '../components/Nav'
+import { Footer } from '../components/Footer'
+import { authClient } from '../lib/auth-client'
 
 import appCss from '../styles/globals.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
-import { getSessionUser } from '../server/actions/session'
 
 // ---------------------------------------------------------------------------
 // Router context type
@@ -34,31 +35,32 @@ export interface MyRouterContext {
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
     meta: [
-      {
-        charSet: 'utf-8',
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
-      {
-        title: 'Mari Mewarnai',
-      },
+      { charSet: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { title: 'Mari Mewarnai' },
     ],
-    links: [
-      {
-        rel: 'stylesheet',
-        href: appCss,
-      },
-    ],
+    links: [{ rel: 'stylesheet', href: appCss }],
   }),
 
-  // Runs on every navigation — populates context.user from session cookie.
-  // Uses a server function so @tanstack/react-start/server is never imported
-  // in client code (avoids import-protection violations and Seroval errors).
+  // Runs on every navigation.
+  // Uses authClient.getSession() so browser cookies are always sent correctly,
+  // both on SSR (initial load) and client-side navigation.
   beforeLoad: async () => {
-    const user = await getSessionUser()
-    return { user }
+    try {
+      const { data: session } = await authClient.getSession()
+      if (!session?.user) return { user: null }
+
+      const u = session.user as Record<string, unknown>
+      return {
+        user: {
+          id: session.user.id,
+          username: (u.username as string) ?? session.user.name,
+          name: session.user.name,
+        },
+      }
+    } catch {
+      return { user: null }
+    }
   },
 
   shellComponent: RootDocument,
@@ -77,15 +79,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <Nav />
         <main>{children}</main>
+        <Footer />
         <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
+          config={{ position: 'bottom-right' }}
           plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
+            { name: 'Tanstack Router', render: <TanStackRouterDevtoolsPanel /> },
             TanStackQueryDevtools,
           ]}
         />

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- rear wheel -->
+  <circle cx="55" cy="140" r="30"/>
+  <circle cx="55" cy="140" r="3"/>
+  <!-- front wheel -->
+  <circle cx="145" cy="140" r="30"/>
+  <circle cx="145" cy="140" r="3"/>
+  <!-- spokes rear -->
+  <line x1="55" y1="110" x2="55" y2="170"/>
+  <line x1="25" y1="140" x2="85" y2="140"/>
+  <line x1="40" y1="125" x2="70" y2="155"/>
+  <line x1="70" y1="125" x2="40" y2="155"/>
+  <!-- spokes front -->
+  <line x1="145" y1="110" x2="145" y2="170"/>
+  <line x1="115" y1="140" x2="175" y2="140"/>
+  <line x1="130" y1="125" x2="160" y2="155"/>
+  <line x1="160" y1="125" x2="130" y2="155"/>
+  <!-- frame -->
+  <path d="M55,140 L90,80 L140,140"/>
+  <path d="M90,80 L115,80 L145,140"/>
+  <path d="M55,140 L100,140"/>
+  <!-- seat -->
+  <ellipse cx="90" cy="75" rx="12" ry="5"/>
+  <!-- seat post -->
+  <line x1="90" y1="80" x2="90" y2="75" stroke-width="3"/>
+  <!-- handlebars -->
+  <path d="M110,72 Q115,65 120,72"/>
+  <line x1="115" y1="80" x2="115" y2="72"/>
+  <!-- pedals -->
+  <circle cx="100" cy="140" r="4"/>
+  <!-- crank -->
+  <line x1="100" y1="140" x2="100" y2="140" stroke-width="2"/>
+  <!-- chain hint -->
+  <path d="M55,143 Q80,150 100,143" stroke-width="1.5" fill="none"/>
+  <!-- kickstand -->
+  <line x1="60" y1="168" x2="40" y2="185"/>
+  <!-- ground -->
+  <line x1="15" y1="175" x2="185" y2="175"/>
+</svg>

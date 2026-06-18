@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- ball -->
+  <circle cx="100" cy="100" r="55"/>
+  <!-- pentagon center -->
+  <polygon points="100,72 112,80 108,95 92,95 88,80"/>
+  <!-- pentagon top -->
+  <polygon points="100,72 130,50 115,45"/>
+  <!-- pentagon bottom -->
+  <polygon points="92,95 65,90 60,110"/>
+  <!-- pentagon right -->
+  <polygon points="112,80 145,85 130,110"/>
+  <!-- pentagon left -->
+  <polygon points="88,80 55,85 70,110"/>
+  <!-- pentagon bottom-right -->
+  <polygon points="108,95 130,110 115,140"/>
+  <!-- pentagon bottom-left -->
+  <polygon points="92,95 70,110 85,140"/>
+  <!-- panel lines from center -->
+  <line x1="100" y1="72" x2="100" y2="45"/>
+  <line x1="108" y1="95" x2="140" y2="150"/>
+  <line x1="92" y1="95" x2="60" y2="150"/>
+  <line x1="112" y1="80" x2="155" y2="100"/>
+  <line x1="88" y1="80" x2="45" y2="100"/>
+  <!-- net hint -->
+  <path d="M45,100 Q40,110 45,120" stroke-width="1.5" fill="none"/>
+  <path d="M155,100 Q160,110 155,120" stroke-width="1.5" fill="none"/>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- rocket body -->
+  <path d="M100,20 Q120,30 125,80 L125,145 Q125,155 100,160 Q75,155 75,145 L75,80 Q80,30 100,20 Z"/>
+  <!-- nose cone -->
+  <path d="M90,50 Q100,35 110,50"/>
+  <!-- window -->
+  <circle cx="100" cy="95" r="16"/>
+  <circle cx="100" cy="95" r="10"/>
+  <!-- window cross -->
+  <line x1="84" y1="95" x2="116" y2="95"/>
+  <line x1="100" y1="79" x2="100" y2="111"/>
+  <!-- left fin -->
+  <path d="M75,130 Q55,140 50,165 L75,155"/>
+  <!-- right fin -->
+  <path d="M125,130 Q145,140 150,165 L125,155"/>
+  <!-- bottom fins -->
+  <path d="M85,150 Q80,160 85,168"/>
+  <path d="M115,150 Q120,160 115,168"/>
+  <!-- exhaust flames -->
+  <path d="M88,160 Q92,178 86,188 Q100,175 100,188 Q100,175 114,188 Q108,178 112,160"/>
+  <!-- body stripes -->
+  <line x1="75" y1="110" x2="125" y2="110"/>
+  <!-- stars -->
+  <path d="M30,40 L32,35 L34,40 L39,40 L35,44 L37,49 L32,46 L27,49 L29,44 L25,40 Z" stroke-width="1.5"/>
+  <path d="M165,60 L167,55 L169,60 L174,60 L170,64 L172,69 L167,66 L162,69 L164,64 L160,60 Z" stroke-width="1.5"/>
+  <circle cx="45" cy="70" r="2" fill="#222"/>
+  <circle cx="160" cy="40" r="2" fill="#222"/>
+  <circle cx="170" cy="90" r="2" fill="#222"/>
+  <circle cx="30" cy="90" r="2" fill="#222"/>
+</svg>

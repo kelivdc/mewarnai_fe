@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- body -->
+  <ellipse cx="105" cy="140" rx="45" ry="35"/>
+  <!-- belly -->
+  <path d="M90,165 Q105,175 130,165"/>
+  <!-- neck -->
+  <path d="M75,125 Q65,100 70,80"/>
+  <!-- head -->
+  <ellipse cx="72" cy="70" rx="22" ry="18"/>
+  <!-- snout -->
+  <ellipse cx="92" cy="75" rx="10" ry="8"/>
+  <!-- eye -->
+  <circle cx="68" cy="65" r="5"/>
+  <circle cx="68" cy="65" r="2.5" fill="#222"/>
+  <!-- nostril -->
+  <circle cx="96" cy="73" r="2" fill="#222"/>
+  <!-- tiny flames from mouth -->
+  <path d="M102,76 Q108,72 104,80" stroke-width="2"/>
+  <path d="M102,78 Q110,78 105,84" stroke-width="2"/>
+  <!-- horn -->
+  <polygon points="55,52 48,32 62,52"/>
+  <!-- ear -->
+  <path d="M80,55 Q85,45 78,42"/>
+  <!-- spikes on back -->
+  <polygon points="80,120 78,110 85,118"/>
+  <polygon points="95,115 100,102 102,115"/>
+  <polygon points="115,113 122,100 120,114"/>
+  <polygon points="135,118 140,106 138,122"/>
+  <!-- wings -->
+  <path d="M130,120 Q155,100 160,115 Q165,130 145,125 Q155,110 130,120"/>
+  <path d="M125,125 Q148,108 152,120 Q156,135 140,130 Q150,115 125,125"/>
+  <!-- legs -->
+  <rect x="68" y="168" width="14" height="22" rx="5"/>
+  <rect x="90" y="170" width="14" height="20" rx="5"/>
+  <rect x="118" y="168" width="14" height="22" rx="5"/>
+  <rect x="140" y="170" width="14" height="20" rx="5"/>
+  <!-- tail -->
+  <path d="M150,135 Q170,130 175,145 Q180,155 168,158"/>
+  <path d="M150,140 Q168,138 172,150"/>
+  <!-- tail spike -->
+  <polygon points="175,145 188,140 178,152"/>
+</svg>

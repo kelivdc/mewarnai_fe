@@ -1,91 +1,113 @@
 // src/server/actions/auth.ts
-// TanStack Start server actions for authentication
-// Requirements: 1.2, 2.2, 2.4
+// TanStack Start server actions for authentication — all session management
+// is delegated to Better Auth (email+password + Google OAuth).
 
 import { createServerFn } from '@tanstack/react-start'
-import { getCookie, setCookie, deleteCookie } from '@tanstack/react-start/server'
-
-import { registerUser, loginUser, invalidateSession } from '../auth'
+import { deleteCookie, getCookies } from '@tanstack/react-start/server'
+import { auth } from '#/lib/auth'
 
 // ---------------------------------------------------------------------------
-// Cookie configuration
+// Helper: build Headers with cookie string from current request cookies
 // ---------------------------------------------------------------------------
 
-const COOKIE_NAME = 'session'
-const COOKIE_MAX_AGE = 30 * 24 * 60 * 60 // 30 days in seconds
-
-const cookieOptions = {
-  httpOnly: true,
-  sameSite: 'lax' as const,
-  secure: process.env.NODE_ENV === 'production',
-  maxAge: COOKIE_MAX_AGE,
-  path: '/',
+function buildCookieHeaders(): Headers {
+  const cookies = getCookies()
+  const cookieHeader = Object.entries(cookies)
+    .map(([k, v]) => `${k}=${v}`)
+    .join('; ')
+  const headers = new Headers()
+  headers.set('cookie', cookieHeader)
+  return headers
 }
 
 // ---------------------------------------------------------------------------
 // Input types
 // ---------------------------------------------------------------------------
 
-interface AuthInput {
+interface RegisterInput {
+  username: string
+  password: string
+}
+
+interface LoginInput {
   username: string
   password: string
 }
 
 // ---------------------------------------------------------------------------
 // registerAction
-// Validates + creates a new user account, then sets the session cookie.
-// Requirements: 1.2
 // ---------------------------------------------------------------------------
 
 export const registerAction = createServerFn({ method: 'POST' })
-  .validator((data: AuthInput) => data)
+  .validator((data: RegisterInput) => data)
   .handler(async ({ data }) => {
-    const result = await registerUser(data.username, data.password)
+    try {
+      const email = `${data.username.toLowerCase()}@local.app`
 
-    if (!result.success || !result.token) {
-      return { success: false as const, error: result.error ?? 'Registration failed' }
+      const result = await auth.api.signUpEmail({
+        body: {
+          email,
+          password: data.password,
+          name: data.username,
+          username: data.username,
+          displayUsername: data.username,
+        },
+        headers: buildCookieHeaders(),
+      })
+
+      if (!result?.user) {
+        return { success: false as const, error: 'Registration failed' }
+      }
+
+      return { success: true as const, userId: result.user.id }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Registration failed'
+      if (message.toLowerCase().includes('unique') || message.toLowerCase().includes('already')) {
+        return { success: false as const, error: 'Username is already taken' }
+      }
+      return { success: false as const, error: message }
     }
-
-    setCookie(COOKIE_NAME, result.token, cookieOptions)
-
-    return { success: true as const, userId: result.userId }
   })
 
 // ---------------------------------------------------------------------------
 // loginAction
-// Authenticates an existing user and sets the session cookie on success.
-// Requirements: 2.2
 // ---------------------------------------------------------------------------
 
 export const loginAction = createServerFn({ method: 'POST' })
-  .validator((data: AuthInput) => data)
+  .validator((data: LoginInput) => data)
   .handler(async ({ data }) => {
-    const result = await loginUser(data.username, data.password)
+    try {
+      const email = `${data.username.toLowerCase()}@local.app`
 
-    if (!result.success || !result.token) {
-      return { success: false as const, error: result.error ?? 'Login failed' }
+      const result = await auth.api.signInEmail({
+        body: { email, password: data.password },
+        headers: buildCookieHeaders(),
+      })
+
+      if (!result?.user) {
+        return { success: false as const, error: 'Invalid credentials' }
+      }
+
+      return { success: true as const, userId: result.user.id }
+    } catch {
+      return { success: false as const, error: 'Incorrect username or password. Please try again.' }
     }
-
-    setCookie(COOKIE_NAME, result.token, cookieOptions)
-
-    return { success: true as const, userId: result.userId }
   })
 
 // ---------------------------------------------------------------------------
 // logoutAction
-// Reads the session cookie, invalidates the session in the DB, clears cookie.
-// Requirements: 2.4
 // ---------------------------------------------------------------------------
 
 export const logoutAction = createServerFn({ method: 'POST' })
   .handler(async () => {
-    const token = getCookie(COOKIE_NAME)
-
-    if (token) {
-      await invalidateSession(token)
+    try {
+      await auth.api.signOut({ headers: buildCookieHeaders() })
+    } catch {
+      // best-effort
     }
 
-    deleteCookie(COOKIE_NAME, { path: '/' })
+    deleteCookie('better-auth.session_token', { path: '/' })
+    deleteCookie('session', { path: '/' })
 
     return { success: true as const }
   })

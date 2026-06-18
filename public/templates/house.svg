@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- walls -->
+  <rect x="30" y="100" width="140" height="85" rx="2"/>
+  <!-- roof -->
+  <polygon points="20,102 100,40 180,102"/>
+  <!-- chimney -->
+  <rect x="130" y="50" width="18" height="35"/>
+  <rect x="127" y="48" width="24" height="5"/>
+  <!-- smoke -->
+  <path d="M139,48 Q143,38 138,30 Q144,22 140,15"/>
+  <path d="M144,46 Q150,36 145,28"/>
+  <!-- door -->
+  <rect x="82" y="140" width="36" height="45" rx="4"/>
+  <path d="M82,140 Q100,130 118,140"/>
+  <circle cx="114" cy="163" r="3"/>
+  <!-- left windows -->
+  <rect x="42" y="112" width="32" height="28" rx="3"/>
+  <line x1="58" y1="112" x2="58" y2="140"/>
+  <line x1="42" y1="126" x2="74" y2="126"/>
+  <!-- right windows -->
+  <rect x="126" y="112" width="32" height="28" rx="3"/>
+  <line x1="142" y1="112" x2="142" y2="140"/>
+  <line x1="126" y1="126" x2="158" y2="126"/>
+  <!-- path -->
+  <path d="M82,185 Q70,190 55,185"/>
+  <path d="M118,185 Q130,190 145,185"/>
+  <!-- garden left -->
+  <circle cx="22" cy="185" r="12"/>
+  <line x1="22" y1="185" x2="22" y2="196"/>
+  <!-- garden right -->
+  <circle cx="178" cy="185" r="12"/>
+  <line x1="178" y1="185" x2="178" y2="196"/>
+  <!-- ground -->
+  <line x1="5" y1="196" x2="195" y2="196"/>
+  <!-- mailbox -->
+  <rect x="10" y="170" width="14" height="10" rx="3"/>
+  <path d="M10,175 Q17,170 24,175"/>
+  <line x1="17" y1="180" x2="17" y2="196"/>
+  <!-- flowers -->
+  <path d="M32,196 Q35,188 38,196"/>
+  <path d="M42,196 Q45,186 48,196"/>
+  <path d="M158,196 Q161,188 164,196"/>
+  <path d="M168,196 Q171,186 174,196"/>
+  <!-- roof detail -->
+  <path d="M20,102 Q60,98 100,95 Q140,98 180,102" stroke-width="1.5"/>
+</svg>

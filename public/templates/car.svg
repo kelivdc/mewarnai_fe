@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- body -->
+  <path d="M30,130 L40,110 L120,110 L150,130 L170,130 Q175,130 175,125 L175,95 Q175,90 170,90 L130,90 L120,75 L50,75 L40,90 L30,90 Q25,90 25,95 L25,125 Q25,130 30,130 Z"/>
+  <!-- roof -->
+  <path d="M55,90 L70,72 L110,72 L120,90"/>
+  <!-- window -->
+  <path d="M73,90 L78,76 L102,76 L107,90"/>
+  <!-- mirror -->
+  <rect x="28" y="82" width="6" height="8" rx="2"/>
+  <!-- door line -->
+  <line x1="80" y1="90" x2="80" y2="128"/>
+  <line x1="110" y1="90" x2="110" y2="128"/>
+  <!-- door handles -->
+  <rect x="78" y="108" width="4" height="2"/>
+  <rect x="108" y="108" width="4" height="2"/>
+  <!-- front wheel -->
+  <circle cx="140" cy="135" r="14"/>
+  <circle cx="140" cy="135" r="7"/>
+  <!-- rear wheel -->
+  <circle cx="60" cy="135" r="14"/>
+  <circle cx="60" cy="135" r="7"/>
+  <!-- headlight -->
+  <rect x="168" y="98" width="6" height="10" rx="3"/>
+  <!-- taillight -->
+  <rect x="24" y="100" width="5" height="8" rx="2"/>
+  <!-- exhaust -->
+  <path d="M130,130 Q145,135 135,140"/>
+  <path d="M132,133 Q148,140 135,145"/>
+  <!-- racing stripe -->
+  <path d="M50,112 L150,112" stroke-width="2"/>
+</svg>

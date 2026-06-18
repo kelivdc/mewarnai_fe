@@ -106,6 +106,12 @@
   h2 { font-size: 1.75rem; }
   h3 { font-size: 1.5rem; }
 
+  /* Fullscreen coloring mode — hide Nav + Footer, let canvas take over */
+  .fullscreen-coloring nav,
+  .fullscreen-coloring footer {
+    display: none !important;
+  }
+
   /* Minimum 44×44px touch targets for all interactive elements (WCAG + req 8) */
   button,
   [role="button"],

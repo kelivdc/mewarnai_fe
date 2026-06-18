@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- helmet -->
+  <circle cx="100" cy="70" r="32"/>
+  <!-- visor -->
+  <path d="M82,55 Q100,45 118,55 Q122,70 115,85 Q100,92 85,85 Q78,70 82,55 Z"/>
+  <!-- body suit -->
+  <rect x="72" y="100" width="56" height="65" rx="8"/>
+  <!-- backpack -->
+  <rect x="118" y="105" width="22" height="45" rx="5"/>
+  <!-- left arm -->
+  <path d="M72,115 Q50,120 45,140"/>
+  <circle cx="43" cy="142" r="8"/>
+  <!-- right arm -->
+  <path d="M128,115 Q150,105 158,95"/>
+  <circle cx="160" cy="93" r="8"/>
+  <!-- left leg -->
+  <rect x="80" y="162" width="18" height="28" rx="6"/>
+  <ellipse cx="89" cy="192" rx="12" ry="6"/>
+  <!-- right leg -->
+  <rect x="102" y="162" width="18" height="28" rx="6"/>
+  <ellipse cx="111" cy="192" rx="12" ry="6"/>
+  <!-- belt -->
+  <rect x="70" y="148" width="60" height="8" rx="3"/>
+  <rect x="96" y="146" width="8" height="12" rx="2"/>
+  <!-- chest panel -->
+  <rect x="85" y="110" width="30" height="20" rx="3"/>
+  <circle cx="95" cy="118" r="3" fill="#222"/>
+  <circle cx="105" cy="118" r="3" fill="#222"/>
+  <rect x="95" cy="122" width="10" height="4" rx="1"/>
+  <!-- helmet details -->
+  <circle cx="122" cy="68" r="5" stroke-width="1.5"/>
+  <line x1="120" y1="58" x2="120" y2="78"/>
+  <!-- tether line -->
+  <path d="M140,120 Q165,100 170,80 Q175,60 168,50" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- stars -->
+  <circle cx="40" cy="40" r="2" fill="#222"/>
+  <circle cx="175" cy="35" r="2" fill="#222"/>
+  <circle cx="160" cy="50" r="1.5" fill="#222"/>
+  <circle cx="25" cy="70" r="1.5" fill="#222"/>
+  <circle cx="50" cy="170" r="2" fill="#222"/>
+  <circle cx="170" cy="175" r="2" fill="#222"/>
+</svg>

@@ -15,9 +15,12 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as MyImagesRouteImport } from './routes/my-images'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ColorTemplateRouteImport } from './routes/color/template'
 import { Route as ColorImageIdRouteImport } from './routes/color/$imageId'
 import { Route as ApiUploadsSplatRouteImport } from './routes/api/uploads/$'
+import { Route as ApiCanvasImageIdRouteImport } from './routes/api/canvas/$imageId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const UploadRoute = UploadRouteImport.update({
@@ -50,9 +53,19 @@ const GalleryRoute = GalleryRouteImport.update({
   path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ColorTemplateRoute = ColorTemplateRouteImport.update({
+  id: '/color/template',
+  path: '/color/template',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ColorImageIdRoute = ColorImageIdRouteImport.update({
@@ -65,6 +78,11 @@ const ApiUploadsSplatRoute = ApiUploadsSplatRouteImport.update({
   path: '/api/uploads/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCanvasImageIdRoute = ApiCanvasImageIdRouteImport.update({
+  id: '/api/canvas/$imageId',
+  path: '/api/canvas/$imageId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -73,6 +91,7 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/explore': typeof ExploreRoute
   '/gallery': typeof GalleryRoute
   '/login': typeof LoginRoute
   '/my-images': typeof MyImagesRoute
@@ -80,11 +99,14 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/upload': typeof UploadRoute
   '/color/$imageId': typeof ColorImageIdRoute
+  '/color/template': typeof ColorTemplateRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/canvas/$imageId': typeof ApiCanvasImageIdRoute
   '/api/uploads/$': typeof ApiUploadsSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/explore': typeof ExploreRoute
   '/gallery': typeof GalleryRoute
   '/login': typeof LoginRoute
   '/my-images': typeof MyImagesRoute
@@ -92,12 +114,15 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/upload': typeof UploadRoute
   '/color/$imageId': typeof ColorImageIdRoute
+  '/color/template': typeof ColorTemplateRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/canvas/$imageId': typeof ApiCanvasImageIdRoute
   '/api/uploads/$': typeof ApiUploadsSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/explore': typeof ExploreRoute
   '/gallery': typeof GalleryRoute
   '/login': typeof LoginRoute
   '/my-images': typeof MyImagesRoute
@@ -105,13 +130,16 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/upload': typeof UploadRoute
   '/color/$imageId': typeof ColorImageIdRoute
+  '/color/template': typeof ColorTemplateRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/canvas/$imageId': typeof ApiCanvasImageIdRoute
   '/api/uploads/$': typeof ApiUploadsSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/explore'
     | '/gallery'
     | '/login'
     | '/my-images'
@@ -119,11 +147,14 @@ export interface FileRouteTypes {
     | '/register'
     | '/upload'
     | '/color/$imageId'
+    | '/color/template'
     | '/api/auth/$'
+    | '/api/canvas/$imageId'
     | '/api/uploads/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/explore'
     | '/gallery'
     | '/login'
     | '/my-images'
@@ -131,11 +162,14 @@ export interface FileRouteTypes {
     | '/register'
     | '/upload'
     | '/color/$imageId'
+    | '/color/template'
     | '/api/auth/$'
+    | '/api/canvas/$imageId'
     | '/api/uploads/$'
   id:
     | '__root__'
     | '/'
+    | '/explore'
     | '/gallery'
     | '/login'
     | '/my-images'
@@ -143,12 +177,15 @@ export interface FileRouteTypes {
     | '/register'
     | '/upload'
     | '/color/$imageId'
+    | '/color/template'
     | '/api/auth/$'
+    | '/api/canvas/$imageId'
     | '/api/uploads/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ExploreRoute: typeof ExploreRoute
   GalleryRoute: typeof GalleryRoute
   LoginRoute: typeof LoginRoute
   MyImagesRoute: typeof MyImagesRoute
@@ -156,7 +193,9 @@ export interface RootRouteChildren {
   RegisterRoute: typeof RegisterRoute
   UploadRoute: typeof UploadRoute
   ColorImageIdRoute: typeof ColorImageIdRoute
+  ColorTemplateRoute: typeof ColorTemplateRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiCanvasImageIdRoute: typeof ApiCanvasImageIdRoute
   ApiUploadsSplatRoute: typeof ApiUploadsSplatRoute
 }
 
@@ -204,11 +243,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/color/template': {
+      id: '/color/template'
+      path: '/color/template'
+      fullPath: '/color/template'
+      preLoaderRoute: typeof ColorTemplateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/color/$imageId': {
@@ -225,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiUploadsSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/canvas/$imageId': {
+      id: '/api/canvas/$imageId'
+      path: '/api/canvas/$imageId'
+      fullPath: '/api/canvas/$imageId'
+      preLoaderRoute: typeof ApiCanvasImageIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -237,6 +297,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ExploreRoute: ExploreRoute,
   GalleryRoute: GalleryRoute,
   LoginRoute: LoginRoute,
   MyImagesRoute: MyImagesRoute,
@@ -244,7 +305,9 @@ const rootRouteChildren: RootRouteChildren = {
   RegisterRoute: RegisterRoute,
   UploadRoute: UploadRoute,
   ColorImageIdRoute: ColorImageIdRoute,
+  ColorTemplateRoute: ColorTemplateRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiCanvasImageIdRoute: ApiCanvasImageIdRoute,
   ApiUploadsSplatRoute: ApiUploadsSplatRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- main tower -->
+  <rect x="65" y="70" width="70" height="120" rx="2"/>
+  <!-- left tower -->
+  <rect x="20" y="90" width="45" height="100" rx="2"/>
+  <!-- right tower -->
+  <rect x="135" y="90" width="45" height="100" rx="2"/>
+  <!-- main tower roof -->
+  <polygon points="60,72 100,20 140,72"/>
+  <!-- left tower roof -->
+  <polygon points="15,92 42,55 70,92"/>
+  <!-- right tower roof -->
+  <polygon points="130,92 158,55 185,92"/>
+  <!-- flags -->
+  <line x1="100" y1="20" x2="100" y2="8" stroke-width="2"/>
+  <polygon points="100,8 116,16 100,20"/>
+  <line x1="42" y1="55" x2="42" y2="42" stroke-width="2"/>
+  <polygon points="42,42 56,48 42,52"/>
+  <line x1="158" y1="55" x2="158" y2="42" stroke-width="2"/>
+  <polygon points="158,42 172,48 158,52"/>
+  <!-- main door -->
+  <path d="M85,190 L85,160 Q100,148 115,160 L115,190"/>
+  <line x1="100" y1="152" x2="100" y2="190"/>
+  <!-- left tower window -->
+  <circle cx="42" cy="130" r="8"/>
+  <line x1="42" y1="122" x2="42" y2="138"/>
+  <line x1="34" y1="130" x2="50" y2="130"/>
+  <!-- right tower window -->
+  <circle cx="158" cy="130" r="8"/>
+  <line x1="158" y1="122" x2="158" y2="138"/>
+  <line x1="150" y1="130" x2="166" y2="130"/>
+  <!-- upper windows -->
+  <rect x="85" y="85" width="12" height="16" rx="3"/>
+  <rect x="103" y="85" width="12" height="16" rx="3"/>
+  <!-- ground -->
+  <line x1="5" y1="190" x2="195" y2="190"/>
+  <!-- bushes -->
+  <circle cx="8" cy="186" r="8"/>
+  <circle cx="18" cy="183" r="6"/>
+  <circle cx="185" cy="186" r="8"/>
+  <circle cx="175" cy="183" r="6"/>
+  <!-- stone lines -->
+  <line x1="65" y1="100" x2="135" y2="100" stroke-width="1.5"/>
+  <line x1="65" y1="125" x2="135" y2="125" stroke-width="1.5"/>
+  <line x1="65" y1="150" x2="135" y2="150" stroke-width="1.5"/>
+  <line x1="65" y1="175" x2="135" y2="175" stroke-width="1.5"/>
+  <line x1="20" y1="120" x2="65" y2="120" stroke-width="1.5"/>
+  <line x1="20" y1="150" x2="65" y2="150" stroke-width="1.5"/>
+</svg>

@@ -3,12 +3,11 @@
 // Requirements: 6.2, 6.3, 6.4
 
 import { createServerFn } from '@tanstack/react-start'
-import { getCookie } from '@tanstack/react-start/server'
 import { and, eq } from 'drizzle-orm'
 
 import { db } from '../db/client'
 import { coloringSaves } from '../db/schema'
-import { validateSession } from '../auth'
+import { resolveUserId } from './resolve-user'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -41,15 +40,10 @@ export type GetColoringSaveResult =
 export const saveColoringAction = createServerFn({ method: 'POST' })
   .validator((data: SaveColoringInput) => data)
   .handler(async ({ data }): Promise<SaveColoringResult> => {
-    // ── 1. Authenticate ──────────────────────────────────────────────────────
-    const token = getCookie('session')
-    if (!token) {
-      return { success: false, error: 'You must be logged in to save progress.' }
-    }
-
-    const userId = await validateSession(token)
+    // ── 1. Authenticate (supports custom + OAuth sessions) ──────────────────
+    const userId = await resolveUserId()
     if (!userId) {
-      return { success: false, error: 'Your session has expired. Please log in again.' }
+      return { success: false, error: 'You must be logged in to save progress.' }
     }
 
     // ── 2. Convert number[] back to Buffer ───────────────────────────────────
@@ -104,13 +98,8 @@ export const saveColoringAction = createServerFn({ method: 'POST' })
 export const getColoringSaveQuery = createServerFn({ method: 'GET' })
   .validator((data: { imageId: number }) => data)
   .handler(async ({ data }): Promise<GetColoringSaveResult> => {
-    // ── 1. Authenticate ──────────────────────────────────────────────────────
-    const token = getCookie('session')
-    if (!token) {
-      return null
-    }
-
-    const userId = await validateSession(token)
+    // ── 1. Authenticate (supports custom + OAuth sessions) ──────────────────
+    const userId = await resolveUserId()
     if (!userId) {
       return null
     }

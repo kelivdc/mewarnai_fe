@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- petals -->
+  <path d="M100,100 Q80,60 100,40 Q120,60 100,100"/>
+  <path d="M100,100 Q140,80 160,100 Q140,120 100,100"/>
+  <path d="M100,100 Q120,140 100,160 Q80,140 100,100"/>
+  <path d="M100,100 Q60,80 40,100 Q60,120 100,100"/>
+  <path d="M100,100 Q70,55 55,65 Q70,75 100,100"/>
+  <path d="M100,100 Q130,55 145,65 Q130,75 100,100"/>
+  <path d="M100,100 Q130,145 145,135 Q130,125 100,100"/>
+  <path d="M100,100 Q70,145 55,135 Q70,125 100,100"/>
+  <!-- center -->
+  <circle cx="100" cy="100" r="16"/>
+  <circle cx="100" cy="100" r="10" stroke-width="1.5"/>
+  <!-- seed dots -->
+  <circle cx="95" cy="96" r="2" fill="#222"/>
+  <circle cx="105" cy="96" r="2" fill="#222"/>
+  <circle cx="98" cy="103" r="2" fill="#222"/>
+  <circle cx="102" cy="103" r="2" fill="#222"/>
+  <circle cx="100" cy="98" r="2" fill="#222"/>
+  <!-- stem -->
+  <path d="M100,116 Q110,140 105,168"/>
+  <!-- leaves -->
+  <path d="M103,140 Q125,130 130,145 Q120,148 103,140"/>
+  <path d="M104,150 Q80,145 75,158 Q85,163 104,150"/>
+</svg>

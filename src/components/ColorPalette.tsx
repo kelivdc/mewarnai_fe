@@ -29,7 +29,7 @@ interface ColorPaletteProps {
 export function ColorPalette({ selectedColor, onColorSelect }: ColorPaletteProps) {
   return (
     <div
-      className="flex flex-wrap gap-3 p-3 justify-center"
+      className="flex flex-nowrap overflow-x-auto gap-3 p-3 justify-start lg:flex-wrap lg:justify-center scrollbar-none"
       role="radiogroup"
       aria-label="Pilih warna"
     >
@@ -37,7 +37,7 @@ export function ColorPalette({ selectedColor, onColorSelect }: ColorPaletteProps
         const isSelected = selectedColor !== null && color.hex.toLowerCase() === selectedColor.toLowerCase()
 
         return (
-          <div key={color.id} className="flex flex-col items-center gap-1">
+          <div key={color.id} className="flex flex-col items-center gap-1 shrink-0">
             {/* Swatch button */}
             <button
               type="button"

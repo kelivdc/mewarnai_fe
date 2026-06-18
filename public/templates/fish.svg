@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- body -->
+  <ellipse cx="100" cy="105" rx="22" ry="40"/>
+  <!-- tail fin -->
+  <path d="M78,138 Q100,168 122,138 Q100,145 78,138"/>
+  <!-- dorsal fin -->
+  <path d="M100,65 Q120,80 118,95 Q112,85 100,78"/>
+  <!-- pectoral fin -->
+  <path d="M80,115 Q60,120 65,130 Q72,125 82,120"/>
+  <path d="M120,115 Q140,120 135,130 Q128,125 118,120"/>
+  <!-- eye -->
+  <circle cx="100" cy="90" r="6"/>
+  <circle cx="100" cy="90" r="3" fill="#222"/>
+  <!-- mouth -->
+  <path d="M94,100 Q100,106 106,100"/>
+  <!-- gill line -->
+  <path d="M88,110 Q90,105 88,100"/>
+  <!-- tail lines -->
+  <line x1="100" y1="138" x2="100" y2="155"/>
+  <line x1="90" y1="140" x2="85" y2="152"/>
+  <line x1="110" y1="140" x2="115" y2="152"/>
+  <!-- scales hint -->
+  <path d="M90,115 Q96,112 100,115 Q104,112 110,115" stroke-width="1.5"/>
+  <path d="M88,125 Q94,122 98,125 Q102,122 108,125" stroke-width="1.5"/>
+  <!-- bubbles -->
+  <circle cx="135" cy="85" r="5" fill="none"/>
+  <circle cx="142" cy="73" r="3" fill="none"/>
+  <circle cx="130" cy="68" r="4" fill="none"/>
+</svg>

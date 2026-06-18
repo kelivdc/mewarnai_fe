@@ -3,14 +3,13 @@
 // Requirements: 3.1, 3.6–3.8, 4.1–4.5, 7.1, 7.3, 7.4
 
 import { createServerFn } from '@tanstack/react-start'
-import { getCookie } from '@tanstack/react-start/server'
 import { and, desc, eq } from 'drizzle-orm'
 
 import { db } from '../db/client'
 import { images, coloringSaves } from '../db/schema'
-import { validateSession } from '../auth'
 import { processUploadedImage } from '../imageProcessor'
 import { deleteFiles } from '../storage'
+import { resolveUserId } from './resolve-user'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -33,6 +32,8 @@ export interface GalleryImage {
   uploadedAt: Date
   /** True when the current user has a coloring save for this image. */
   hasSave: boolean
+  /** Timestamp of the last coloring save, used for cache-busting thumbnails. */
+  savedAt: Date | null
 }
 
 // ---------------------------------------------------------------------------
@@ -44,9 +45,8 @@ export interface GalleryImage {
 
 export const getImagesQuery = createServerFn({ method: 'GET' }).handler(
   async (): Promise<GalleryImage[]> => {
-    // Resolve current user from session cookie
-    const token = getCookie('session')
-    const userId = token ? await validateSession(token) : null
+    // Resolve current user from session cookie (supports custom + OAuth)
+    const userId = await resolveUserId()
 
     // Fetch all images left-joined with the current user's coloring saves.
     // When no user is authenticated we still join on imageId but filter to a
@@ -96,15 +96,10 @@ export const getImagesQuery = createServerFn({ method: 'GET' }).handler(
 export const uploadImageAction = createServerFn({ method: 'POST' })
   .validator((data: FormData) => data)
   .handler(async ({ data }): Promise<UploadImageResult> => {
-    // ── 1. Authenticate ──────────────────────────────────────────────────────
-    const token = getCookie('session')
-    if (!token) {
-      return { success: false, error: 'You must be logged in to upload images.' }
-    }
-
-    const userId = await validateSession(token)
+    // ── 1. Authenticate (supports custom + OAuth sessions) ──────────────────
+    const userId = await resolveUserId()
     if (!userId) {
-      return { success: false, error: 'Your session has expired. Please log in again.' }
+      return { success: false, error: 'You must be logged in to upload images.' }
     }
 
     // ── 2. Extract file from FormData ────────────────────────────────────────
@@ -160,13 +155,8 @@ export const uploadImageAction = createServerFn({ method: 'POST' })
 
 export const getUserImagesQuery = createServerFn({ method: 'GET' }).handler(
   async (): Promise<GalleryImage[]> => {
-    // ── 1. Authenticate ──────────────────────────────────────────────────────
-    const token = getCookie('session')
-    if (!token) {
-      return []
-    }
-
-    const userId = await validateSession(token)
+    // ── 1. Authenticate (supports custom + OAuth sessions) ──────────────────
+    const userId = await resolveUserId()
     if (!userId) {
       return []
     }
@@ -181,6 +171,7 @@ export const getUserImagesQuery = createServerFn({ method: 'GET' }).handler(
         filename: images.filename,
         uploadedAt: images.uploadedAt,
         saveId: coloringSaves.id,
+        savedAt: coloringSaves.savedAt,
       })
       .from(images)
       .leftJoin(
@@ -201,6 +192,7 @@ export const getUserImagesQuery = createServerFn({ method: 'GET' }).handler(
       filename: row.filename,
       uploadedAt: row.uploadedAt,
       hasSave: row.saveId != null,
+      savedAt: row.savedAt ?? null,
     }))
   },
 )
@@ -219,15 +211,10 @@ export const getUserImagesQuery = createServerFn({ method: 'GET' }).handler(
 export const deleteImageAction = createServerFn({ method: 'POST' })
   .validator((data: { imageId: number }) => data)
   .handler(async ({ data }): Promise<DeleteImageResult> => {
-    // ── 1. Authenticate ──────────────────────────────────────────────────────
-    const token = getCookie('session')
-    if (!token) {
-      return { success: false, error: 'You must be logged in to delete images.', status: 401 }
-    }
-
-    const userId = await validateSession(token)
+    // ── 1. Authenticate (supports custom + OAuth sessions) ──────────────────
+    const userId = await resolveUserId()
     if (!userId) {
-      return { success: false, error: 'Your session has expired. Please log in again.', status: 401 }
+      return { success: false, error: 'You must be logged in to delete images.', status: 401 }
     }
 
     // ── 2. Fetch the image record ────────────────────────────────────────────

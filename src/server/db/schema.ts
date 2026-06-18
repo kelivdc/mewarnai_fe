@@ -43,8 +43,12 @@ export const users = pgTable('user', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
   // app-specific fields
   username: text('username').unique(),
+  displayUsername: text('display_username'),
   passwordHash: text('password_hash'),
 })
+
+// Better Auth expects singular key names in the schema object
+export const user = users
 
 /**
  * sessions table — compatible with better-auth's Session model.
@@ -63,6 +67,8 @@ export const sessions = pgTable('session', {
   ipAddress: text('ip_address'),
   userAgent: text('user_agent'),
 })
+
+export const session = sessions
 
 /**
  * accounts table — required by better-auth for email+password and OAuth.
@@ -86,6 +92,8 @@ export const accounts = pgTable('account', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 })
 
+export const account = accounts
+
 /**
  * verifications table — required by better-auth for email verification flows.
  */
@@ -97,6 +105,11 @@ export const verifications = pgTable('verification', {
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 })
+
+// Better Auth's drizzle adapter looks up models by schema key name (singular).
+// We export a singular alias so the adapter can find "verification".
+export const verification = verifications
+
 
 // ---------------------------------------------------------------------------
 // App-specific tables

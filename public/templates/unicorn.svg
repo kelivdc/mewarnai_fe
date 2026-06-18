@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- body -->
+  <ellipse cx="90" cy="150" rx="40" ry="30"/>
+  <!-- neck -->
+  <path d="M120,140 Q135,110 130,85"/>
+  <!-- head -->
+  <ellipse cx="130" cy="75" rx="22" ry="18" transform="rotate(-10,130,75)"/>
+  <!-- horn -->
+  <polygon points="132,56 128,40 136,56"/>
+  <!-- ear -->
+  <path d="M115,63 L108,52 L120,58"/>
+  <!-- eye -->
+  <ellipse cx="140" cy="72" rx="4" ry="5"/>
+  <circle cx="141" cy="72" r="2" fill="#222"/>
+  <!-- nostril -->
+  <circle cx="148" cy="80" r="2" fill="#222"/>
+  <!-- mane -->
+  <path d="M115,75 Q105,80 108,95 Q110,105 120,110"/>
+  <path d="M108,95 Q100,100 102,112"/>
+  <path d="M118,65 Q110,60 105,70"/>
+  <!-- legs -->
+  <rect x="58" y="172" width="12" height="20" rx="4"/>
+  <rect x="78" y="174" width="12" height="18" rx="4"/>
+  <rect x="102" y="172" width="12" height="20" rx="4"/>
+  <rect x="122" y="174" width="12" height="18" rx="4"/>
+  <!-- tail -->
+  <path d="M50,140 Q35,130 32,145 Q30,155 40,158"/>
+  <path d="M50,142 Q38,120 28,125"/>
+  <!-- sparkles -->
+  <path d="M160,50 L162,45 L164,50 L169,50 L165,54 L167,59 L162,56 L157,59 L159,54 L155,50 Z" stroke-width="1.5"/>
+  <path d="M30,70 L32,66 L34,70 L38,70 L35,73 L36,77 L32,75 L28,77 L29,73 L26,70 Z" stroke-width="1.5"/>
+</svg>

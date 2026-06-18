@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="#fff" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- body -->
+  <ellipse cx="105" cy="150" rx="50" ry="40"/>
+  <!-- head -->
+  <circle cx="80" cy="100" r="32"/>
+  <!-- trunk -->
+  <path d="M60,115 Q55,145 58,165 Q62,175 70,170"/>
+  <!-- ear -->
+  <ellipse cx="108" cy="85" rx="18" ry="22"/>
+  <!-- eye -->
+  <circle cx="70" cy="95" r="4"/>
+  <circle cx="70" cy="95" r="2" fill="#222"/>
+  <!-- tusk -->
+  <path d="M68,120 Q63,130 65,135" stroke-width="2"/>
+  <!-- front legs -->
+  <rect x="68" y="180" width="16" height="20" rx="6"/>
+  <rect x="88" y="182" width="16" height="18" rx="6"/>
+  <!-- back legs -->
+  <rect x="120" y="180" width="16" height="20" rx="6"/>
+  <rect x="140" y="182" width="16" height="18" rx="6"/>
+  <!-- tail -->
+  <path d="M155,140 Q168,135 165,148" stroke-width="2"/>
+  <circle cx="166" cy="150" r="3"/>
+</svg>

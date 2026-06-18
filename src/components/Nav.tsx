@@ -2,22 +2,17 @@
 // Top navigation bar — auth-aware, kid-friendly, WCAG-compliant touch targets.
 // Requirements: 2.5, 2.6, 8.1, 8.2, 8.4, 8.5
 
-import { Link, useRouterState } from '@tanstack/react-router'
-import { Home, Upload, Images, LogOut, LogIn, UserPlus, User, BadgeDollarSign } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
+import { Upload, Images, LogOut, LogIn, UserPlus, User, BadgeDollarSign, Compass } from 'lucide-react'
+import { authClient } from '#/lib/auth-client'
 
 // ---------------------------------------------------------------------------
 // Nav component
 // ---------------------------------------------------------------------------
 
 export function Nav() {
-  // Read the user from router context — populated by __root.tsx beforeLoad.
-  const user = useRouterState({
-    select: (s) =>
-      s.matches[0]?.context?.user as
-        | { id: string; username: string; name: string }
-        | null
-        | undefined,
-  })
+  const { data: session, isPending } = authClient.useSession()
+  const user = session?.user as { id: string; username?: string; name: string } | undefined
 
   return (
     <nav
@@ -25,8 +20,8 @@ export function Nav() {
       aria-label="Main navigation"
     >
       <div className="mx-auto max-w-5xl px-4">
-        <ul className="flex items-center gap-1 list-none m-0 p-0">
-          {/* Brand / logo area */}
+        <ul className="flex items-center gap-0.5 list-none m-0 p-0">
+          {/* Brand */}
           <li className="mr-auto">
             <Link
               to="/"
@@ -37,61 +32,48 @@ export function Nav() {
             </Link>
           </li>
 
-          {user ? (
-            /* ── Authenticated nav items ───────────── */
+          {isPending ? (
+            <li className="h-10 w-24 rounded-lg bg-neutral-100 animate-pulse" aria-hidden="true" />
+          ) : user ? (
             <>
-              {/* Req 2.5: show username in navigation area */}
-              <li className="hidden sm:flex items-center px-3 py-2 text-base font-semibold text-muted-foreground gap-1 min-h-[44px]">
-                <User size={16} aria-hidden="true" />
-                <span>{user.username ?? user.name}</span>
-              </li>
               <li>
-                <NavLink to="/gallery" icon={<Home size={20} />} label="Home" />
+                <NavLink to="/explore" icon={<Compass size={20} />} label="Explore" />
               </li>
               <li>
                 <NavLink to="/upload" icon={<Upload size={20} />} label="Upload" />
               </li>
               <li>
-                <NavLink
-                  to="/my-images"
-                  icon={<Images size={20} />}
-                  label="My Images"
-                />
+                <NavLink to="/my-images" icon={<Images size={20} />} label="My Images" />
               </li>
               <li>
-                <NavLink
-                  to="/pricing"
-                  icon={<BadgeDollarSign size={20} />}
-                  label="Pricing"
-                />
+                <NavLink to="/pricing" icon={<BadgeDollarSign size={20} />} label="Pricing" />
               </li>
-              <li>
+              {/* Username + logout group */}
+              <li className="hidden sm:flex items-center gap-1.5 pl-2 ml-1 border-l border-border">
+                <span className="flex items-center gap-1.5 px-2 py-2 text-sm font-semibold text-muted-foreground min-h-[44px]">
+                  <User size={16} aria-hidden="true" />
+                  <span className="max-w-[120px] truncate">{user.username ?? user.name}</span>
+                </span>
+                <LogoutButton />
+              </li>
+              {/* Mobile: just logout icon */}
+              <li className="sm:hidden">
                 <LogoutButton />
               </li>
             </>
           ) : (
-            /* ── Unauthenticated nav items ── */
             <>
               <li>
-                <NavLink to="/" icon={<Home size={20} />} label="Home" />
+                <NavLink to="/explore" icon={<Compass size={20} />} label="Explore" />
               </li>
               <li>
-                <NavLink
-                  to="/pricing"
-                  icon={<BadgeDollarSign size={20} />}
-                  label="Pricing"
-                />
+                <NavLink to="/pricing" icon={<BadgeDollarSign size={20} />} label="Pricing" />
               </li>
               <li>
                 <NavLink to="/login" icon={<LogIn size={20} />} label="Login" />
               </li>
               <li>
-                <NavLink
-                  to="/register"
-                  icon={<UserPlus size={20} />}
-                  label="Register"
-                  highlight
-                />
+                <NavLink to="/register" icon={<UserPlus size={20} />} label="Register" highlight />
               </li>
             </>
           )}
@@ -109,7 +91,6 @@ interface NavLinkProps {
   to: string
   icon: React.ReactNode
   label: string
-  /** Renders with a distinct background for emphasis (e.g. Register CTA) */
   highlight?: boolean
 }
 
@@ -130,22 +111,20 @@ function NavLink({ to, icon, label, highlight = false }: NavLinkProps) {
       activeProps={{ className: 'text-brand-orange font-bold' }}
     >
       {icon}
-      <span>{label}</span>
+      <span className="hidden sm:inline">{label}</span>
     </Link>
   )
 }
 
 function LogoutButton() {
   const handleLogout = async () => {
-    try {
-      const { logoutAction } = await import('../server/actions/auth')
-      await logoutAction()
-      // Redirect to login after logout (req 2.4)
-      window.location.href = '/login'
-    } catch {
-      // Fallback: redirect even if the server call fails
-      window.location.href = '/login'
-    }
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          window.location.href = '/login'
+        },
+      },
+    })
   }
 
   return (
@@ -160,7 +139,7 @@ function LogoutButton() {
       aria-label="Logout"
     >
       <LogOut size={20} />
-      <span>Logout</span>
+      <span className="hidden sm:inline">Logout</span>
     </button>
   )
 }

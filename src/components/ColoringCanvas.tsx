@@ -1,4 +1,4 @@
-import React, {
+import {
   forwardRef,
   useCallback,
   useEffect,
@@ -36,6 +36,7 @@ export interface ColoringCanvasHandle {
 // ---------------------------------------------------------------------------
 
 const MAX_UNDO = 20
+const MIN_CANVAS_DIM = 600 // px — smallest dimension we'll render at
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -134,12 +135,15 @@ const ColoringCanvas = forwardRef<ColoringCanvasHandle, ColoringCanvasProps>(
         const container = containerRef.current
         const availableWidth = container ? container.clientWidth : nw
 
-        const scale = availableWidth / nw
-        const cssWidth = availableWidth
+        // Never upscale beyond natural pixel dimensions (1:1 pixel-perfect).
+        // Only downscale if the container is narrower than the image.
+        const cssWidth = Math.min(availableWidth, nw)
+        const scale = cssWidth / nw
         const cssHeight = Math.round(nh * scale)
 
         canvas.style.width = `${cssWidth}px`
         canvas.style.height = `${cssHeight}px`
+        canvas.style.maxWidth = `${nw}px`
       },
       [],
     )
@@ -370,14 +374,26 @@ const ColoringCanvas = forwardRef<ColoringCanvasHandle, ColoringCanvasProps>(
           const img = await loadImage(imageUrl)
           if (cancelled) return
 
-          // Store natural dimensions
-          imageSizeRef.current = { width: img.naturalWidth, height: img.naturalHeight }
+          const nw = img.naturalWidth
+          const nh = img.naturalHeight
 
-          // Set canvas resolution to match the image
-          canvas.width = img.naturalWidth
-          canvas.height = img.naturalHeight
+          // Scale up canvas pixel resolution if the image is too small.
+          // SVG templates render at 200×200 but need ~600px for crisp coloring.
+          // Larger images keep their natural resolution (no downscaling here —
+          // CSS handles fitting it in the container).
+          const minDim = Math.min(nw, nh)
+          const scale = minDim < MIN_CANVAS_DIM ? MIN_CANVAS_DIM / minDim : 1
+          const targetW = Math.round(nw * scale)
+          const targetH = Math.round(nh * scale)
 
-          // Apply responsive CSS sizing
+          // Store target dimensions (these are what CSS will cap at)
+          imageSizeRef.current = { width: targetW, height: targetH }
+
+          // Set canvas pixel resolution
+          canvas.width = targetW
+          canvas.height = targetH
+
+          // Apply responsive CSS sizing (caps at target size)
           applyResponsiveSize(canvas)
 
           // Re-apply after a frame so the DOM has fully laid out
@@ -397,12 +413,13 @@ const ColoringCanvas = forwardRef<ColoringCanvasHandle, ColoringCanvasProps>(
             try {
               const savedImg = await loadImage(blobUrl)
               if (cancelled) return
-              ctx.drawImage(savedImg, 0, 0, canvas.width, canvas.height)
+              ctx.drawImage(savedImg, 0, 0, targetW, targetH)
             } finally {
               URL.revokeObjectURL(blobUrl)
             }
           } else {
-            drawBaseImage(ctx, img)
+            // Draw base image scaled to fill the target resolution
+            ctx.drawImage(img, 0, 0, targetW, targetH)
           }
 
           // Initialise undo stack (empty) and dirty flag (clean)
@@ -449,16 +466,30 @@ const ColoringCanvas = forwardRef<ColoringCanvasHandle, ColoringCanvasProps>(
     return (
       <div
         ref={containerRef}
-        className="w-full"
+        className="max-w-full"
         aria-label="Coloring canvas"
       >
-        <canvas
-          ref={canvasRef}
-          className="block w-full touch-none"
-          aria-label="Coloring page"
-          // width/height (pixel resolution) set programmatically after image load
-          // CSS width overridden by applyResponsiveSize to match container
-        />
+        {/* Coloring-page frame — playful border showing the coloring boundaries */}
+        <div className="relative rounded-2xl border-4 border-dashed border-amber-300 bg-white p-2 shadow-lg shadow-amber-100/50 overflow-hidden">
+          <canvas
+            ref={canvasRef}
+            className="block touch-none rounded-xl"
+            aria-label="Coloring page"
+            // width/height (pixel resolution) set programmatically after image load
+            // CSS width overridden by applyResponsiveSize to match container
+          />
+          {/* Gridline overlay — subtle dot grid on top of the image (pointer-events-none) */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-2 rounded-xl"
+            style={{
+              backgroundImage: `
+                radial-gradient(circle, rgba(241, 213, 184, 0.35) 1px, transparent 1px)
+              `,
+              backgroundSize: '20px 20px',
+            }}
+          />
+        </div>
         {/* Dirty indicator accessible to screen-readers */}
         <span className="sr-only" aria-live="polite">
           {isDirty ? 'Ada perubahan yang belum disimpan.' : ''}

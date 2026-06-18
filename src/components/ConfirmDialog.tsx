@@ -2,7 +2,6 @@
 // Accessible confirmation dialog with kid-friendly UI.
 // Requirements: 7.2, 8.1, 8.2, 8.5
 
-import * as React from 'react'
 import { Dialog } from 'radix-ui'
 import { Trash2, X, Loader2 } from 'lucide-react'
 

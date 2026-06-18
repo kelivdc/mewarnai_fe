@@ -1,15 +1,10 @@
 // src/server/actions/session.ts
-// Server function to resolve the current user from the session cookie.
-// Kept in a separate .ts file so @tanstack/react-start/server is never
-// imported in client-side code (satisfies TanStack Start import-protection).
+// Server function to resolve the current user from the Better Auth session.
+// Called from __root.tsx beforeLoad on every navigation.
 
 import { createServerFn } from '@tanstack/react-start'
-import { getCookie } from '@tanstack/react-start/server'
-import { eq } from 'drizzle-orm'
-
-import { db } from '../db/client'
-import { users } from '../db/schema'
-import { validateSession } from '../auth'
+import { getCookies } from '@tanstack/react-start/server'
+import { auth } from '#/lib/auth'
 
 export interface SessionUser {
   id: string
@@ -18,30 +13,31 @@ export interface SessionUser {
 }
 
 /**
- * Reads the session cookie and returns the associated user, or null if the
- * session is missing/expired.  Called from __root.tsx beforeLoad so every
- * navigation knows who (if anyone) is logged in.
+ * Reads the Better Auth session and returns the associated user, or null.
+ * Uses getCookies() to correctly forward cookies inside a server function.
  */
 export const getSessionUser = createServerFn({ method: 'GET' }).handler(
   async (): Promise<SessionUser | null> => {
-    const token = getCookie('session')
-    if (!token) return null
+    try {
+      const cookies = getCookies()
+      const cookieHeader = Object.entries(cookies)
+        .map(([k, v]) => `${k}=${v}`)
+        .join('; ')
 
-    const userId = await validateSession(token)
-    if (!userId) return null
+      const headers = new Headers()
+      headers.set('cookie', cookieHeader)
 
-    const [user] = await db
-      .select({ id: users.id, username: users.username, name: users.name })
-      .from(users)
-      .where(eq(users.id, userId))
-      .limit(1)
+      const session = await auth.api.getSession({ headers })
+      if (!session?.user) return null
 
-    if (!user) return null
-
-    return {
-      id: user.id,
-      username: user.username ?? user.name,
-      name: user.name,
+      const u = session.user as Record<string, unknown>
+      return {
+        id: session.user.id,
+        username: (u.username as string) ?? session.user.name,
+        name: session.user.name,
+      }
+    } catch {
+      return null
     }
   },
 )

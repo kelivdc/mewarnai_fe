@@ -10,7 +10,7 @@ import { getUserImagesQuery } from '../server/actions/images'
 import { GalleryCard } from '../components/GalleryCard'
 
 export const Route = createFileRoute('/gallery')({
-  beforeLoad: ({ context, location }) => requireAuth({ context, location }),
+  beforeLoad: async ({ context, location }) => requireAuth({ context, location }),
   component: GalleryPage,
 })
 

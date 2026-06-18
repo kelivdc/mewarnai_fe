@@ -287,7 +287,7 @@ export function ImageUploadForm() {
                   className="flex items-center gap-1.5 text-base font-semibold text-red-600"
                 >
                   <XCircle size={16} aria-hidden="true" />
-                  {field.state.meta.errors[0]?.message ?? String(field.state.meta.errors[0])}
+                  {String(field.state.meta.errors[0])}
                 </p>
               )}
             </div>
