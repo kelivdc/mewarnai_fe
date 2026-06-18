@@ -16,7 +16,7 @@
     "db:push": "drizzle-kit push",
     "db:pull": "drizzle-kit pull",
     "db:studio": "drizzle-kit studio",
-    "start": "node .output/server/index.mjs"
+     "start": "/root/.bun/bin/bun run .output/server/index.mjs"
   },
   "dependencies": {
     "@faker-js/faker": "^10.3.0",
