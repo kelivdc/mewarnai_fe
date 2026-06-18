@@ -8,6 +8,9 @@ import tailwindcss from '@tailwindcss/vite'
 import { nitro } from "nitro/vite";
 
 const config = defineConfig({
+  server: {
+    allowedHosts: ["marimewarnai.my.id"]
+  },
   resolve: { tsconfigPaths: true },
   plugins: [devtools(), tailwindcss(), tanstackStart(), viteReact(),nitro(),],
   nitro: {},
