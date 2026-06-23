@@ -19,7 +19,7 @@ import { Label } from './ui/label'
 // ---------------------------------------------------------------------------
 
 const ACCEPTED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const
-const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024 // 10 MB
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024 // 5 MB
 
 const ACCEPTED_LABELS = 'JPEG, PNG, WebP'
 
@@ -188,7 +188,7 @@ export function ImageUploadForm() {
                 return `Format tidak didukung. Gunakan ${ACCEPTED_LABELS}.`
               }
               if (value.size > MAX_FILE_SIZE_BYTES) {
-                return 'Ukuran file terlalu besar. Maksimal 10 MB.'
+                return 'Ukuran file terlalu besar. Maksimal 5 MB.'
               }
               return undefined
             },
@@ -252,7 +252,7 @@ export function ImageUploadForm() {
                         Klik untuk memilih gambar
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        {ACCEPTED_LABELS} · Maksimal 10 MB
+                        {ACCEPTED_LABELS} · Maksimal 5 MB
                       </p>
                     </>
                   )}

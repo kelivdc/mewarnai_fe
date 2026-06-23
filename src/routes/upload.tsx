@@ -31,7 +31,7 @@ function UploadPage() {
             🖼️ Upload Image
           </h1>
           <p className="mt-2 text-base text-muted-foreground max-w-sm mx-auto">
-            Choose a picture to turn into a coloring page. Supported formats: JPEG, PNG, and WebP (max 10 MB).
+            Choose a picture to turn into a coloring page. Supported formats: JPEG, PNG, and WebP (max 5 MB).
           </p>
         </div>
 

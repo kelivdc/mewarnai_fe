@@ -6,7 +6,7 @@ import { saveOriginalFile, saveColoringFile } from './storage'
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const
 type AllowedMimeType = (typeof ALLOWED_MIME_TYPES)[number]
 
-const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024 // 10 MB
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024 // 5 MB
 
 /** Maps MIME type to the file extension used when saving the original. */
 const MIME_TO_EXT: Record<AllowedMimeType, string> = {
@@ -65,7 +65,7 @@ export async function processUploadedImage(
   if (fileBuffer.byteLength > MAX_FILE_SIZE_BYTES) {
     const sizeMB = (fileBuffer.byteLength / (1024 * 1024)).toFixed(2)
     throw new Error(
-      `File too large: ${sizeMB} MB. The maximum allowed size is 10 MB.`,
+      `File too large: ${sizeMB} MB. The maximum allowed size is 5 MB.`,
     )
   }
 
