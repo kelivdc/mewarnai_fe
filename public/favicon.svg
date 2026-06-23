@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFB5B5"/>
+      <stop offset="30%" stop-color="#FFD166"/>
+      <stop offset="60%" stop-color="#4FB8B2"/>
+      <stop offset="100%" stop-color="#2F6A4A"/>
+    </linearGradient>
+    <linearGradient id="crayonBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#E05555"/>
+    </linearGradient>
+    <linearGradient id="crayonTip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E05555"/>
+      <stop offset="100%" stop-color="#C94444"/>
+    </linearGradient>
+    <linearGradient id="paintGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#FF8E8E"/>
+    </linearGradient>
+    <linearGradient id="paintGrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD166"/>
+      <stop offset="100%" stop-color="#FFE088"/>
+    </linearGradient>
+    <linearGradient id="paintGrad3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6BCB77"/>
+      <stop offset="100%" stop-color="#8ADB94"/>
+    </linearGradient>
+    <linearGradient id="paintGrad4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4D96FF"/>
+      <stop offset="100%" stop-color="#7AB3FF"/>
+    </linearGradient>
+    <linearGradient id="paintGrad5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9B59B6"/>
+      <stop offset="100%" stop-color="#BE7FD6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="32" fill="url(#bgGrad)" opacity="0.15"/>
+
+  <!-- Paint palette outer ring -->
+  <ellipse cx="30" cy="34" rx="20" ry="14" fill="#FFF8F0" stroke="#E0D5C8" stroke-width="1.2"/>
+
+  <!-- Palette inner dip -->
+  <ellipse cx="38" cy="32" rx="8" ry="6" fill="url(#bgGrad)" opacity="0.12"/>
+
+  <!-- Paint blobs on palette -->
+  <circle cx="18" cy="28" r="4" fill="url(#paintGrad1)"/>
+  <circle cx="24" cy="24" r="3.8" fill="url(#paintGrad2)"/>
+  <circle cx="14" cy="36" r="3.5" fill="url(#paintGrad3)"/>
+  <circle cx="22" cy="42" r="3.2" fill="url(#paintGrad4)"/>
+  <circle cx="34" cy="44" r="3" fill="url(#paintGrad5)"/>
+
+  <!-- Paint blob highlights -->
+  <circle cx="17" cy="27" r="1.2" fill="white" opacity="0.5"/>
+  <circle cx="23" cy="23" r="1.2" fill="white" opacity="0.5"/>
+  <circle cx="13" cy="35" r="1" fill="white" opacity="0.5"/>
+  <circle cx="21" cy="41" r="1" fill="white" opacity="0.5"/>
+  <circle cx="33" cy="43" r="0.8" fill="white" opacity="0.5"/>
+
+  <!-- Crayon body -->
+  <rect x="35" y="9" width="7" height="28" rx="1.5" fill="url(#crayonBody)" stroke="#C94444" stroke-width="0.8"/>
+
+  <!-- Crayon tip -->
+  <path d="M38.5 37 L35 44 L42 44 Z" fill="url(#crayonTip)" stroke="#C94444" stroke-width="0.8"/>
+
+  <!-- Crayon wrapper bands -->
+  <rect x="35" y="12" width="7" height="2" rx="0.5" fill="#FFB5B5" opacity="0.6"/>
+  <rect x="35" y="16" width="7" height="0.8" rx="0.3" fill="#FFB5B5" opacity="0.4"/>
+
+  <!-- Crayon highlight -->
+  <rect x="36" y="18" width="1.5" height="14" rx="0.5" fill="white" opacity="0.25"/>
+
+  <!-- Sparkle/star details -->
+  <path d="M48 14 L49 17 L52 18 L49 19 L48 22 L47 19 L44 18 L47 17 Z" fill="#FFD166" opacity="0.8"/>
+  <path d="M10 18 L10.8 20 L13 20.8 L10.8 21.6 L10 24 L9.2 21.6 L7 20.8 L9.2 20 Z" fill="#FFD166" opacity="0.7"/>
+
+  <!-- Small color splatter dots -->
+  <circle cx="46" cy="36" r="1.5" fill="#FF6B6B" opacity="0.5"/>
+  <circle cx="44" cy="40" r="1" fill="#FFD166" opacity="0.6"/>
+  <circle cx="50" cy="38" r="1.2" fill="#6BCB77" opacity="0.5"/>
+  <circle cx="47" cy="42" r="0.8" fill="#4D96FF" opacity="0.5"/>
+</svg>
