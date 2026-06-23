@@ -14,7 +14,7 @@ import { authClient } from '#/lib/auth-client'
 export const Route = createFileRoute('/register')({
   beforeLoad: ({ context }) => {
     if (context.user) {
-      throw redirect({ to: '/gallery' })
+      throw redirect({ to: '/explore' })
     }
   },
   component: RegisterPage,
@@ -38,10 +38,11 @@ function RegisterPage() {
   const handleGoogleSignIn = async () => {
     setServerError(null)
     setShowSpinner(true)
-    // Better Auth handles the redirect automatically
+    // Use /auth/callback as the OAuth redirect target — it runs client-side
+    // session check, avoiding SSR cookie forwarding issues.
     await authClient.signIn.social({
       provider: 'google',
-      callbackURL: '/gallery',
+      callbackURL: '/auth/callback',
     })
   }
 
@@ -60,7 +61,7 @@ function RegisterPage() {
         password: value.password,
         name: value.username,
         username: value.username,
-        callbackURL: '/gallery',
+        callbackURL: '/explore',
       } as Parameters<typeof authClient.signUp.email>[0])
 
       clearSpinnerTimer()
@@ -76,8 +77,9 @@ function RegisterPage() {
         } else {
           setServerError(msg || 'Registration failed. Please try again.')
         }
+        return
       }
-      // On success, Better Auth redirects to callbackURL — no need to navigate manually
+      // On success, Better Auth redirects to callbackURL automatically
     },
   })
 

@@ -13,11 +13,11 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 import { Nav } from '../components/Nav'
 import { Footer } from '../components/Footer'
-import { authClient } from '../lib/auth-client'
 
 import appCss from '../styles/globals.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
+import { getSessionUser } from '../server/actions/session'
 
 // ---------------------------------------------------------------------------
 // Router context type
@@ -42,25 +42,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     links: [{ rel: 'stylesheet', href: appCss }],
   }),
 
-  // Runs on every navigation.
-  // Uses authClient.getSession() so browser cookies are always sent correctly,
-  // both on SSR (initial load) and client-side navigation.
+  // Runs on every navigation — resolves user from cookies server-side.
   beforeLoad: async () => {
-    try {
-      const { data: session } = await authClient.getSession()
-      if (!session?.user) return { user: null }
-
-      const u = session.user as Record<string, unknown>
-      return {
-        user: {
-          id: session.user.id,
-          username: (u.username as string) ?? session.user.name,
-          name: session.user.name,
-        },
-      }
-    } catch {
-      return { user: null }
-    }
+    const user = await getSessionUser()
+    return { user }
   },
 
   shellComponent: RootDocument,

@@ -26,11 +26,11 @@ export const auth = betterAuth({
     },
   },
   plugins: [
-    tanstackStartCookies(),
     username({
       // Allow letters, numbers, and underscores (same as app validation rules)
       usernameValidator: (value) => /^[a-zA-Z0-9_]+$/.test(value),
     }),
+    tanstackStartCookies(),
   ],
 })
 

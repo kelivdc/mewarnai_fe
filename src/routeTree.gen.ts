@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UploadRouteImport } from './routes/upload'
+import { Route as SuccessRouteImport } from './routes/success'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as MyImagesRouteImport } from './routes/my-images'
@@ -26,6 +27,11 @@ import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 const UploadRoute = UploadRouteImport.update({
   id: '/upload',
   path: '/upload',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuccessRoute = SuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterRoute = RegisterRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/my-images': typeof MyImagesRoute
   '/pricing': typeof PricingRoute
   '/register': typeof RegisterRoute
+  '/success': typeof SuccessRoute
   '/upload': typeof UploadRoute
   '/color/$imageId': typeof ColorImageIdRoute
   '/color/template': typeof ColorTemplateRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/my-images': typeof MyImagesRoute
   '/pricing': typeof PricingRoute
   '/register': typeof RegisterRoute
+  '/success': typeof SuccessRoute
   '/upload': typeof UploadRoute
   '/color/$imageId': typeof ColorImageIdRoute
   '/color/template': typeof ColorTemplateRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/my-images': typeof MyImagesRoute
   '/pricing': typeof PricingRoute
   '/register': typeof RegisterRoute
+  '/success': typeof SuccessRoute
   '/upload': typeof UploadRoute
   '/color/$imageId': typeof ColorImageIdRoute
   '/color/template': typeof ColorTemplateRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/my-images'
     | '/pricing'
     | '/register'
+    | '/success'
     | '/upload'
     | '/color/$imageId'
     | '/color/template'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/my-images'
     | '/pricing'
     | '/register'
+    | '/success'
     | '/upload'
     | '/color/$imageId'
     | '/color/template'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/my-images'
     | '/pricing'
     | '/register'
+    | '/success'
     | '/upload'
     | '/color/$imageId'
     | '/color/template'
@@ -191,6 +203,7 @@ export interface RootRouteChildren {
   MyImagesRoute: typeof MyImagesRoute
   PricingRoute: typeof PricingRoute
   RegisterRoute: typeof RegisterRoute
+  SuccessRoute: typeof SuccessRoute
   UploadRoute: typeof UploadRoute
   ColorImageIdRoute: typeof ColorImageIdRoute
   ColorTemplateRoute: typeof ColorTemplateRoute
@@ -206,6 +219,13 @@ declare module '@tanstack/react-router' {
       path: '/upload'
       fullPath: '/upload'
       preLoaderRoute: typeof UploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/success': {
+      id: '/success'
+      path: '/success'
+      fullPath: '/success'
+      preLoaderRoute: typeof SuccessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register': {
@@ -303,6 +323,7 @@ const rootRouteChildren: RootRouteChildren = {
   MyImagesRoute: MyImagesRoute,
   PricingRoute: PricingRoute,
   RegisterRoute: RegisterRoute,
+  SuccessRoute: SuccessRoute,
   UploadRoute: UploadRoute,
   ColorImageIdRoute: ColorImageIdRoute,
   ColorTemplateRoute: ColorTemplateRoute,

@@ -1,5 +1,7 @@
 // src/routes/login.tsx
-// Login page — delegates all auth to Better Auth (username/password + Google OAuth).
+// Login page — delegates all auth to Better Auth (email/password + Google OAuth).
+// Uses signIn.email() which natively supports callbackURL redirect.
+// (The username plugin's signIn.username() has a known callbackURL bug — issue #6297)
 
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { useForm } from '@tanstack/react-form'
@@ -19,7 +21,7 @@ const searchSchema = z.object({
 export const Route = createFileRoute('/login')({
   beforeLoad: ({ context }) => {
     if (context.user) {
-      throw redirect({ to: '/gallery' })
+      throw redirect({ to: '/explore' })
     }
   },
   validateSearch: (search) => searchSchema.parse(search),
@@ -43,15 +45,14 @@ function LoginPage() {
   const safeRedirect =
     redirectTo && redirectTo.startsWith('/') && !redirectTo.startsWith('/login')
       ? redirectTo
-      : '/gallery'
+      : '/explore'
 
   const handleGoogleSignIn = async () => {
     setServerError(null)
     setShowSpinner(true)
-    // Better Auth handles the redirect automatically
     await authClient.signIn.social({
       provider: 'google',
-      callbackURL: safeRedirect,
+      callbackURL: '/explore',      
     })
   }
 
@@ -64,9 +65,11 @@ function LoginPage() {
       setServerError(null)
       spinnerTimer.current = setTimeout(() => setShowSpinner(true), 300)
 
-      // signIn.username redirects to callbackURL on success via Better Auth
-      const { error } = await authClient.signIn.username({
-        username: value.username,
+      // Use signIn.email (not signIn.username) — the email-based flow properly
+      // supports callbackURL. Better Auth redirects the browser on success.
+      const email = `${value.username.toLowerCase()}@local.app`
+      const { error } = await authClient.signIn.email({
+        email,
         password: value.password,
         callbackURL: safeRedirect,
       })
@@ -80,7 +83,7 @@ function LoginPage() {
         setShowSpinner(false)
         setServerError('Incorrect username or password. Please try again.')
       }
-      // On success, Better Auth redirects to callbackURL — no need to navigate manually
+      // On success, Better Auth redirects to callbackURL automatically
     },
   })
 

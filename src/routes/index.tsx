@@ -1,5 +1,5 @@
 // src/routes/index.tsx
-// Homepage — hero landing page for guests, redirect to /gallery for auth'd users.
+// Homepage — hero landing page for guests, redirect to /explore for auth'd users.
 
 import { createFileRoute, redirect, Link } from '@tanstack/react-router'
 import { LogIn, UserPlus, Palette, ImagePlus, Sparkles } from 'lucide-react'
@@ -7,7 +7,7 @@ import { LogIn, UserPlus, Palette, ImagePlus, Sparkles } from 'lucide-react'
 export const Route = createFileRoute('/')({
   beforeLoad: ({ context }) => {
     if (context.user) {
-      throw redirect({ to: '/gallery' })
+      throw redirect({ to: '/explore' })
     }
   },
   component: HomePage,

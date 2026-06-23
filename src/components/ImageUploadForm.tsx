@@ -105,13 +105,13 @@ export function ImageUploadForm() {
         }
 
         // Req 3.7: success notification + invalidate gallery cache
-        showToast('success', 'Gambar berhasil diunggah! Mengalihkan ke galeri…')
+        showToast('success', 'Gambar berhasil diunggah! Mengalihkan ke halaman explore…')
 
         await queryClient.invalidateQueries({ queryKey: ['images'] })
 
-        // Navigate to gallery after brief delay so user sees success toast
+        // Navigate to explore after brief delay so user sees success toast
         setTimeout(() => {
-          navigate({ to: '/gallery' })
+          navigate({ to: '/explore' })
         }, 1500)
       } catch (err) {
         showToast(

@@ -25,10 +25,10 @@ export function Nav() {
           <li className="mr-auto">
             <Link
               to="/"
-              className="flex items-center gap-2 px-3 py-2 rounded-lg font-extrabold text-lg text-brand-orange hover:text-brand-orange-hover transition-colors min-h-[44px] min-w-[44px]"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg font-extrabold text-lg text-brand-blue hover:text-brand-orange-hover transition-colors min-h-[44px] min-w-[44px]"
               aria-label="Mari Mewarnai — home"
             >
-              🎨 <span className="hidden sm:inline">Mari Mewarnai</span>
+              🎨 <span className="hidden sm:inline">MariMewarnai</span>
             </Link>
           </li>
 
